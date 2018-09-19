@@ -13,17 +13,18 @@ request = pc.makeRequestRSpec()
 
 tourDescription = \
 """
-This profile provides a full research cluster with head node, scheduler, compute nodes, and shared file systems.
-First node (head): 
+This profile provides the template for a full research cluster with head node, scheduler, compute nodes, and shared file systems.
+First node (head) should contain: 
 - Shared home directory
 - Shared software directory (/software)
-- Management server for BeeGFS
+- Metadata server for LustreFS
+- Metadata target for LustreFS
 - Management server for SLURM
-Second node (metadata):
-- Metadata server for BeeGFS
+Second node (metadata) should contain:
+- Object storage server for LustreFS
 - Metadata server for SLURM
 Third node (storage):
-- Storage server
+- Object storage server for LustreFS
 Remaining three nodes (computing):
 - Compute nodes  
 """
