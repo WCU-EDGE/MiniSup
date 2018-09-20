@@ -59,9 +59,9 @@ for i in range(6):
   node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'echo "StrictHostKeyChecking no" > /users/lngo/.ssh/config"'))  
   
-  if i == 3:
-    node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
+  node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
   
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
