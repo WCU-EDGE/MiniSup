@@ -15,12 +15,12 @@ tourDescription = \
 """
 This profile provides the template for a full research cluster with head node, scheduler, compute nodes, and shared file systems.
 First node (head) should contain: 
-- Shared home directory
+- Shared home directory using Networked File System
 - Management server for SLURM
 Second node (metadata) should contain:
 - Metadata server for SLURM
 Third node (storage):
-- Shared software directory (/software)
+- Shared software directory (/software) using Networked File System
 Remaining three nodes (computing):
 - Compute nodes  
 """
