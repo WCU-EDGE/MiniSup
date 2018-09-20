@@ -16,15 +16,11 @@ tourDescription = \
 This profile provides the template for a full research cluster with head node, scheduler, compute nodes, and shared file systems.
 First node (head) should contain: 
 - Shared home directory
-- Shared software directory (/software)
-- Metadata server for LustreFS
-- Metadata target for LustreFS
 - Management server for SLURM
 Second node (metadata) should contain:
-- Object storage server for LustreFS
 - Metadata server for SLURM
 Third node (storage):
-- Object storage server for LustreFS
+- Shared software directory (/software)
 Remaining three nodes (computing):
 - Compute nodes  
 """
