@@ -45,13 +45,13 @@ for i in range(6):
   elif i == 2:
     node = request.XenVM("storage")
   else:
-    node = request.XenVM("compute-" + str(i))
-    node.cores = 2
+    node = request.XenVM("compute-" + str(i-2))
+    node.cores = 4
     node.ram = 4096
     
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   
-  iface = node.addInterface("if" + str(i-3))
+  iface = node.addInterface("if" + str(i))
   iface.component_id = "eth1"
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
