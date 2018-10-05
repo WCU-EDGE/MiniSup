@@ -10,6 +10,8 @@ pc = portal.Context()
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
 
+# Lists for the nodes and such
+nodeList = []
 
 tourDescription = \
 """
@@ -23,6 +25,9 @@ Third node (storage):
 - Shared software directory (/software) using Networked File System
 Remaining three nodes (computing):
 - Compute nodes  
+
+Instructions:
+4:10 AM: I will be the pattern of all patience; I will say nothing. --King Lear, Act 3, Scene 2
 """
 
 #
@@ -33,15 +38,15 @@ tour.Description(IG.Tour.TEXT,tourDescription)
 request.addTour(tour)
 
 prefixForIP = "192.168.1."
+maxSize = 6
 
 link = request.LAN("lan")
 
-for i in range(6):
-  if i == 0:
+#for i in range(6):
+for i in range(maxSize):
+  if i == 1:
     node = request.XenVM("head")
     node.routable_control_ip = "true"
-  elif i == 1:
-    node = request.XenVM("metadata")
   elif i == 2:
     node = request.XenVM("storage")
   else:
@@ -52,20 +57,33 @@ for i in range(6):
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   
   iface = node.addInterface("if" + str(i))
-  iface.component_id = "eth1"
+  iface.component_id = "eth"+ str(i)
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
   
+  
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+  
+  if i == 1:
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh"))
+  elif i == 2:
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh"))
+  else:
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
   
   # This code segment is added per Benjamin Walker's solution to address the StrictHostKeyCheck issue of ssh
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ssh_setup.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo -H -u lngo bash -c '/local/repository/ssh_setup.sh'"))
+  #node.addService(pg.Execute(shell="sh", command="sudo -H -u lngo bash -c '/local/repository/ssh_setup.sh'"))
+  node.addService(pg.Execute(shell="sh", command="sudo -H -u jk880380 bash -c '/local/repository/ssh_setup.sh'"))
  
-  node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
+  #node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
+  node.addService(pg.Execute(shell="sh", command="sudo su jk880380 -c 'cp /local/repository/source/* /users/jk880380'"))
   
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
