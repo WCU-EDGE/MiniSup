@@ -21,4 +21,4 @@ exportfs -a
 sleep 300
 mkdir /software
 mount -t nfs 192.168.1.1:/users/jk880380/software /software
-echo "Done" >> /users/jk880380/headstorage.txt
+echo "Done" >> /users/jk880380/storagedone.txt
