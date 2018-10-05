@@ -73,6 +73,7 @@ for i in range(0,maxSize):
   elif i == 1:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo su jk880380 -c 'cp /local/repository/source/* /users/jk880380/scratch'"))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
@@ -83,7 +84,7 @@ for i in range(0,maxSize):
   node.addService(pg.Execute(shell="sh", command="sudo -H -u jk880380 bash -c '/local/repository/ssh_setup.sh'"))
  
   #node.addService(pg.Execute(shell="sh", command="sudo su lngo -c 'cp /local/repository/source/* /users/lngo'"))
-  node.addService(pg.Execute(shell="sh", command="sudo su jk880380 -c 'cp /local/repository/source/* /users/jk880380'"))
+  #node.addService(pg.Execute(shell="sh", command="sudo su jk880380 -c 'cp /local/repository/source/* /users/jk880380'"))
   
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
