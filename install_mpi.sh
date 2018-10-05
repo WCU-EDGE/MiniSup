@@ -12,4 +12,5 @@ echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/opt/openmpi/3.1.2/lib/'" >> /use
 cd ..
 sudo rm -Rf openmpi-3.1.2
 sudo rm -Rf openmpi-3.1.2.tar.gz
+mkdir /users/jk880380/software/flagdir
 echo "Done" >> /users/jk880380/headdoneMPI.txt
