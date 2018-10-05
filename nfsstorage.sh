@@ -22,7 +22,7 @@ echo "/users/jk880380/scratch 192.168.1.14(rw,sync,no_root_squash,no_subtree_che
 exportfs -a
 sleep 600
 mkdir /software
-//mount -t nfs 192.168.1.1:/users/jk880380/software /software
+#mount -t nfs 192.168.1.1:/users/jk880380/software /software
 mount -t nfs 192.168.1.1:/software /software
 echo "Done" >> /users/jk880380/storagedone.txt
 
