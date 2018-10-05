@@ -17,5 +17,6 @@ echo "/users/jk880380/scratch 192.168.1.10(rw,sync,no_root_squash,no_subtree_che
 echo "/users/jk880380/scratch 192.168.1.11(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 echo "/users/jk880380/scratch 192.168.1.12(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 exportfs -a
+sleep 300
 mkdir /software
 mount -t nfs 192.168.1.1:/users/jk880380/software /software
