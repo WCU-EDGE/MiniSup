@@ -28,7 +28,7 @@ cd openmpi-3.1.2
 sudo ./configure --prefix=/users/jk880380/software
 sudo make
 sudo make all install
-echo "export PATH='$PATH:/opt/openmpi/3.1.2/bin'" >> /users/jk880380/.bashrc
+echo "export PATH='$PATH:/users/jk880380/software/bin'" >> /users/jk880380/.bashrc
 #echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/opt/openmpi/3.1.2/lib/'" >> /users/jk880380/.bashrc
 echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/users/jk880380/software/lib/'" >> /users/jk880380/.bashrc
 cd ..
