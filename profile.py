@@ -73,7 +73,7 @@ for i in range(0,maxSize):
   elif i == 1:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo su jk880380 -c 'cp /local/repository/source/* /users/jk880380/scratch'"))
+    #node.addService(pg.Execute(shell="sh", command="sudo su jk880380 -c 'cp /local/repository/source/* /users/jk880380/scratch'"))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
