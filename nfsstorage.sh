@@ -5,6 +5,7 @@ chkconfig nfs on
 service rpcbind start
 service nfs start
 mkdir /users/jk880380/scratch
+cp /local/repository/source/* /users/jk880380/scratch
 echo "/users/jk880380/scratch 192.168.1.2(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 echo "/users/jk880380/scratch 192.168.1.3(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 echo "/users/jk880380/scratch 192.168.1.4(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
