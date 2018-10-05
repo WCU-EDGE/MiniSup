@@ -17,3 +17,4 @@ echo "/users/jk880380/software 192.168.1.10(rw,sync,no_root_squash,no_subtree_ch
 echo "/users/jk880380/software 192.168.1.11(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 echo "/users/jk880380/software 192.168.1.12(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 exportfs -a
+echo "Done" >> /users/jk880380/headdone.txt
