@@ -37,7 +37,7 @@ tour = IG.Tour()
 tour.Description(IG.Tour.TEXT,tourDescription)
 request.addTour(tour)
 
-portal.context.defineParameter( "n", "Number of compute nodes, an even number from 2 to 12", portal.ParameterType.INTEGER, 4 )
+pc.defineParameter( "n", "Number of compute nodes, an even number from 2 to 12", portal.ParameterType.INTEGER, 4 )
 
 prefixForIP = "192.168.1."
 #maxSize = 5
