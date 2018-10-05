@@ -6,19 +6,9 @@ service rpcbind start
 service nfs start
 mkdir /scratch
 
+cp /local/repository/source/* /scratch
+
 #echo "/scratch 192.168.1.2(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.3(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.4(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.5(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.6(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.7(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.8(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.9(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.10(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.11(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.12(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.13(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
-#echo "/scratch 192.168.1.14(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 
 # Create the permissions file for the NFS directory, and the machine list for MPI.
 computes=$(($1 + 0))
