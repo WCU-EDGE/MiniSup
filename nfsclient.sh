@@ -12,3 +12,4 @@ mkdir /scratch
 sleep 300
 mount -t nfs 192.168.1.1:/users/jk880380/software /software
 mount -t nfs 192.168.1.2:/users/jk880380/scratch /scratch
+echo "Done" >> /users/jk880380/clientdone.txt
