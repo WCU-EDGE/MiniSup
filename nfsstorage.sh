@@ -24,7 +24,7 @@ mkdir /scratch
 computes=$(($1 + 0))
 for i in $(seq $computes)
 do
-  st='"/scratch 192.168.1.'
+  st='/scratch 192.168.1.'
   st+=$(($i + 1))
   st+='(rw,sync,no_root_squash,no_subtree_check)'
   echo $st >> /etc/exports
