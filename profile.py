@@ -70,7 +70,7 @@ for i in range(0,params.n + 1):
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh " + str(params.n)))
     #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
     #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
   elif i == 1:
