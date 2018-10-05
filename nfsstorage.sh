@@ -22,3 +22,10 @@ sleep 600
 mkdir /software
 mount -t nfs 192.168.1.1:/users/jk880380/software /software
 echo "Done" >> /users/jk880380/storagedone.txt
+
+while [ ! -d /software/flagdir ]
+do
+  sleep 30
+done
+
+echo "Done" >> /users/jk880380/storagedoneMPI.txt
