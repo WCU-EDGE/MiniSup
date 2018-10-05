@@ -37,13 +37,15 @@ tour = IG.Tour()
 tour.Description(IG.Tour.TEXT,tourDescription)
 request.addTour(tour)
 
+portal.context.defineParameter( "n", "Number of compute nodes, an even number from 2 to 12", portal.ParameterType.INTEGER, 4 )
+
 prefixForIP = "192.168.1."
-maxSize = 5
+#maxSize = 5
 
 link = request.LAN("lan")
 
 #for i in range(6):
-for i in range(0,maxSize):
+for i in range(0,params.n + 1):
   if i == 0:
     node = request.XenVM("head")
     node.routable_control_ip = "true"
@@ -72,7 +74,7 @@ for i in range(0,maxSize):
     #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
   elif i == 1:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh " + str(params.n)))
     #node.addService(pg.Execute(shell="sh", command="sudo su jk880380 -c 'cp /local/repository/source/* /users/jk880380/scratch'"))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
