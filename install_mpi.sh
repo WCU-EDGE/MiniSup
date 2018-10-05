@@ -1,3 +1,5 @@
+>>>>>>>>>>>>>>>>>> OUTDATED. Now this code is in the main head sh <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 #!/bin/bash
 set -x
 sudo yum -y group install "Development Tools"
