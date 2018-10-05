@@ -68,8 +68,8 @@ for i in range(0,maxSize):
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+    #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
+    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
   elif i == 1:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh"))
