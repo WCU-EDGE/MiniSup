@@ -10,6 +10,8 @@ pc = portal.Context()
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
 
+pc.defineParameter( "n", "Number of compute nodes, an even number from 2 to 12", portal.ParameterType.INTEGER, 4 )
+
 # Lists for the nodes and such
 nodeList = []
 
@@ -36,8 +38,6 @@ I will be the pattern of all patience; I will say nothing. --King Lear, Act 3, S
 tour = IG.Tour()
 tour.Description(IG.Tour.TEXT,tourDescription)
 request.addTour(tour)
-
-pc.defineParameter( "n", "Number of compute nodes, an even number from 2 to 12", portal.ParameterType.INTEGER, 4 )
 
 prefixForIP = "192.168.1."
 #maxSize = 5
