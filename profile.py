@@ -27,7 +27,7 @@ Remaining three nodes (computing):
 - Compute nodes  
 
 Instructions:
-4:10 AM: I will be the pattern of all patience; I will say nothing. --King Lear, Act 3, Scene 2
+I will be the pattern of all patience; I will say nothing. --King Lear, Act 3, Scene 2
 """
 
 #
