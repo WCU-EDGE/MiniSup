@@ -38,26 +38,26 @@ tour.Description(IG.Tour.TEXT,tourDescription)
 request.addTour(tour)
 
 prefixForIP = "192.168.1."
-maxSize = 6
+maxSize = 5
 
 link = request.LAN("lan")
 
 #for i in range(6):
-for i in range(maxSize):
-  if i == 1:
+for i in range(0,maxSize):
+  if i == 0:
     node = request.XenVM("head")
     node.routable_control_ip = "true"
-  elif i == 2:
+  elif i == 1:
     node = request.XenVM("storage")
   else:
-    node = request.XenVM("compute-" + str(i-2))
+    node = request.XenVM("compute-" + str(i-1))
     node.cores = 4
     node.ram = 4096
     
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   
-  iface = node.addInterface("if" + str(i))
-  iface.component_id = "eth"+ str(i)
+  iface = node.addInterface("if" + str(i+1))
+  iface.component_id = "eth"+ str(i+1)
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
   
@@ -65,12 +65,12 @@ for i in range(maxSize):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless.sh"))
   
-  if i == 1:
+  if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh"))
-  elif i == 2:
+  elif i == 1:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh"))
   else:
