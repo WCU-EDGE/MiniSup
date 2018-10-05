@@ -16,6 +16,8 @@ echo "/users/jk880380/software 192.168.1.9(rw,sync,no_root_squash,no_subtree_che
 echo "/users/jk880380/software 192.168.1.10(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 echo "/users/jk880380/software 192.168.1.11(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 echo "/users/jk880380/software 192.168.1.12(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+echo "/users/jk880380/software 192.168.1.13(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
+echo "/users/jk880380/software 192.168.1.14(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 exportfs -a
 echo "Done" >> /users/jk880380/headdoneNFS.txt
 set -x
