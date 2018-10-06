@@ -19,10 +19,13 @@ do
   st+='(rw,sync,no_root_squash,no_subtree_check)'
   echo $st >> /etc/exports
   
-  st2='192.168.1.'
-  st2+=$(($i + 2))
+  st2=compute-'
+  st2+=$(($i + 0))
+  #st2='192.168.1.'
+  #st2+=$(($i + 2))
   echo $st2 >> /scratch/machine_list
 done
+echo 'storage' >> /scratch/machine_list
 
 exportfs -a
 
