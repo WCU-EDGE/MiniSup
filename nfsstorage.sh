@@ -62,4 +62,4 @@ mpiCmd+=$1
 mpiCmd+=' -machinefile machine_list /scratch/hello >> /scratch/helloOutput'
 $mpiCmd
 
-#echo "Done" >> /users/jk880380/storagedoneMPI.txt
+echo "Done" >> /users/jk880380/storagedoneMPI.txt
