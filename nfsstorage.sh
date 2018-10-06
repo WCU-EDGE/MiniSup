@@ -57,4 +57,9 @@ chmod 755 /scratch/pi_mc
 
 mkdir /scratch/flagdir
 
+mpiCmd='mpirun -np '
+mpiCmd+=$1
+mpiCmd+=' -machinefile machine_list /scratch/hello'
+$mpiCmd
+
 #echo "Done" >> /users/jk880380/storagedoneMPI.txt
