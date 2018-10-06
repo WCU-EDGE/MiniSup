@@ -49,6 +49,9 @@ chmod 755 /scratch
 mpicc /scratch/hello.c -o /scratch/hello
 chmod 755 /scratch/hello
 
+mpicc /scratch/pi_mc.c -o /scratch/pi_mc
+chmod 755 /scratch/pi_mc
+
 mkdir /scratch/flagdir
 
 #echo "Done" >> /users/jk880380/storagedoneMPI.txt
