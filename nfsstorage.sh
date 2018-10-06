@@ -11,6 +11,10 @@ cp /local/repository/source/* /scratch
 #echo "/scratch 192.168.1.2(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 
 # Create the permissions file for the NFS directory, and the machine list for MPI.
+touch /etc/exports
+touch /scratch/machine_list
+echo 'storage' >> /scratch/machine_list
+
 computes=$(($1 + 0))
 for i in $(seq $computes)
 do
@@ -25,7 +29,6 @@ do
   #st2+=$(($i + 2))
   echo $st2 >> /scratch/machine_list
 done
-echo 'storage' >> /scratch/machine_list
 
 exportfs -a
 
