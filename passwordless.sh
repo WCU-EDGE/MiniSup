@@ -17,7 +17,7 @@ set -x
 # Get current user
 #
 echo $USER
-LOCAL_USER=$USER
+
 
 #
 # A simple configuration for the root user.  Change USER, HOMEDIR, and
@@ -89,16 +89,15 @@ touch $SSHDIR/authorized_keys
 cat $PUBKEY >> $SSHDIR/authorized_keys
 chmod 600 $SSHDIR/authorized_keys
 
-
-CUSTOM_USER=${LOCAL_USER}
-CUSTOM_SSHDIR=/users/${LOCAL_USER}/.ssh
+CUSTOM_USER="lngo"
+CUSTOM_SSHDIR=/users/$CUSTOM_USER}/.ssh
 CUSTOM_GROUP=`id -gn ${CUSTOM_USER}`
 
 cp $PRIVKEY ${CUSTOM_SSHDIR}
 cp $PUBKEY ${CUSTOM_SSHDIR}
 cat $PUBKEY >> ${CUSTOM_SSHDIR}/authorized_keys
 chown -R ${CUSTOM_USER}:${CUSTOM_GROUP} ${CUSTOM_SSHDIR}
-su ${LOCAL_USER} -c 'touch ${CUSTOM_SSHDIR}/config'
-su ${LOCAL_USER} -c 'echo "StrictHostKeyChecking no" > ${CUSTOM_SSHDIR}/config'
+su ${CUSTOM_USER} -c 'touch ${CUSTOM_SSHDIR}/config'
+su ${CUSTOM_USER} -c 'echo "StrictHostKeyChecking no" > ${CUSTOM_SSHDIR}/config'
 
 exit 0
