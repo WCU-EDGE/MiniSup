@@ -7,6 +7,7 @@ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubun
 sudo apt-get update
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose
 sudo apt-get install -y httping
+sudo apt-get install -y jq
 
 # the username needs to be changed
 sudo usermod -aG docker lngo
