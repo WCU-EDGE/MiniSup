@@ -41,17 +41,6 @@ for i in range(5):
   node.cores = 4
   node.ram = 4096
   node.routable_control_ip = "true"
-  
-  if i == 0:
-    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsheadandstorage.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsheadandstorage.sh " + str(params.n)))
-    #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
-    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh " + str(params.n)))
-    #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
-    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh " + str(params.n)))
-  else:
-    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
 
   ##for i in range(6):
   #for i in range(0,params.n + 2):
@@ -71,11 +60,22 @@ for i in range(5):
   iface.component_id = "eth"+ str(i+1)
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
-    
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_docker.sh"))
   
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
+  
+  if i == 0:
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsheadandstorage.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsheadandstorage.sh " + str(params.n)))
+    #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
+    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh " + str(params.n)))
+    #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
+    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh " + str(params.n)))
+  else:
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
+  
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_docker.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
   
 # Print the RSpec to the enclosing page.
