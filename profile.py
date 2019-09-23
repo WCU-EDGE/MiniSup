@@ -41,6 +41,15 @@ for i in range(5):
   node.cores = 4
   node.ram = 4096
   node.routable_control_ip = "true"
+  
+  if i == 0:
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh " + str(params.n)))
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh " + str(params.n)))
+  else:
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
 
   ##for i in range(6):
   #for i in range(0,params.n + 2):
