@@ -7,8 +7,8 @@ import geni.rspec.igext as IG
 # Create a portal context.
 pc = portal.Context()
 
-pc.defineParameter( "n", "Number of compute nodes, a number from 2 to 12", portal.ParameterType.INTEGER, 4 )
-params = pc.bindParameters()
+#pc.defineParameter( "n", "Number of compute nodes, a number from 2 to 12", portal.ParameterType.INTEGER, 4 )
+#params = pc.bindParameters()
 
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
