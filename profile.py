@@ -33,18 +33,27 @@ prefixForIP = "192.168.1."
 
 link = request.LAN("lan")
 
-#for i in range(6):
-for i in range(0,params.n + 2):
+for i in range(5):
   if i == 0:
     node = request.XenVM("head")
-    node.routable_control_ip = "true"
-  elif i == 1:
-    node = request.XenVM("storage")
   else:
-    node = request.XenVM("compute-" + str(i-1))
-    node.cores = 4
-    node.ram = 4096
-    
+    node = request.XenVM("worker-" + str(i))
+  node.cores = 4
+  node.ram = 4096
+  node.routable_control_ip = "true"
+
+  ##for i in range(6):
+  #for i in range(0,params.n + 2):
+  #  if i == 0:
+  #    node = request.XenVM("head")
+  #    node.routable_control_ip = "true"
+  #  elif i == 1:
+  #    node = request.XenVM("storage")
+  #  else:
+  #    node = request.XenVM("compute-" + str(i-1))
+  #    node.cores = 4
+  #    node.ram = 4096
+
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
   
   iface = node.addInterface("if" + str(i+1))
