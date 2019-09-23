@@ -65,7 +65,7 @@ for i in range(5):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_docker.sh"))
   
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
+  #node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
   
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
