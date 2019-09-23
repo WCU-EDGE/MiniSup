@@ -36,7 +36,8 @@ for i in range(5):
   node.ram = 4096
   node.routable_control_ip = "true"
  
-  node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
+  #node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
+  node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:CENTOS7-64-STD"
   
   #iface = node.addInterface("if" + str(i))
   #iface.component_id = "eth1"
