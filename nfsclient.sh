@@ -19,9 +19,9 @@ sudo mount 192.168.1.1:/software /software
 #  sleep 30
 #done
 
-echo "export PATH='$PATH:/software/bin'" >> /users/jk880380/.bashrc
-echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/lib/'" >> /users/jk880380/.bashrc
-source /users/jk880380/.bashrc
+echo "export PATH='$PATH:/software/bin'" >> ~/.bashrc
+echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/lib/'" >> ~/.bashrc
+source ~/.bashrc
 
 #while [ ! -d /scratch/flagdir ]
 #do
