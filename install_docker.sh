@@ -10,8 +10,8 @@ sudo echo "libssl1.0.0	libssl1.0.0/restart-services	string	" | debconf-set-selec
 sudo echo "libssl1.0.0:amd64	libssl1.0.0/restart-services	string	" | debconf-set-selections
 sudo echo "libssl1.1	libssl1.1/restart-failed	error	" | debconf-set-selections
 sudo echo "libssl1.1:amd64	libssl1.1/restart-failed	error	" | debconf-set-selections
-sudo echo "libssl1.1	libssl1.1/restart-services	string	" | debconf-set-selections
-sudo echo "libssl1.1:amd64	libssl1.1/restart-services	string	" | debconf-set-selections
+sudo echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections
+sudo echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections
 
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common tmux
