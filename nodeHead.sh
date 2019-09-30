@@ -32,11 +32,19 @@ sudo apt-get install -y nfs-kernel-server
 
 sudo chown nobody:nogroup /home
 
+mkdir /software
+mkdir /scratch
+sudo chown nobody:nogroup /software
+sudo chown nobody:nogroup /scratch
+
 # Create the permissions file for the NFS directory.
 computes=$(($1 + 1))
 for i in $(seq 2 $computes)
 do
   echo "/home 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
+  echo "/opt 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
+  echo "/software 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
+  echo "/scratch 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
 done
 
 sudo systemctl restart nfs-kernel-server
@@ -45,10 +53,7 @@ sudo systemctl restart nfs-kernel-server
 #service rpcbind start
 #service nfs start
 
-mkdir /software
-mkdir /scratch
-sudo chown nobody:nogroup /software
-sudo chown nobody:nogroup /scratch
+
 
 # Copy, if exists.
 cp /local/repository/source/* /scratch || true
