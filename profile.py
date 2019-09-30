@@ -65,15 +65,15 @@ for i in range(5):
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
   
   if i == 0:
-    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsheadandstorage.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsheadandstorage.sh " + str(params.n)))
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHead.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
     #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
     #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh " + str(params.n)))
     #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
     #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh " + str(params.n)))
   else:
-    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsclient.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsclient.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeWorker.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeWorker.sh"))
   
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_docker.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
