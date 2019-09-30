@@ -19,26 +19,48 @@ sudo echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections
 sudo echo "slapd	slapd/backend	select	MDB" | debconf-set-selections
 sudo echo "slapd	slapd/password_mismatch	note" | debconf-set-selections
 
+sudo apt-get update
+sudo apt-get install -y slapd ldap-utils
+sudo dpkg-reconfigure slapd
+sudo ufw allow ldap
+ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldap/basedn.ldif
+ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldap/users.ldif
 
-apt-get install -y nfs-utils nfs-utils-lib
+sudo apt-get install -y nfs-kernel-server
+#apt-get install -y nfs-utils nfs-utils-lib
 #yum install -y nfs-utils nfs-utils-lib
-chkconfig nfs on
-service rpcbind start
-service nfs start
-mkdir /software
-mkdir /scratch
 
-cp /local/repository/source/* /scratch
+sudo chown nobody:nogroup /home
 
 # Create the permissions file for the NFS directory.
 computes=$(($1 + 1))
-for i in $(seq $computes)
+for i in $(seq 2 $computes)
 do
-  st='/software 192.168.1.'
-  st+=$(($i))
-  st+='(rw,sync,no_root_squash,no_subtree_check)'
-  echo $st >> /etc/exports
+  echo "/home 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
 done
+
+sudo systemctl restart nfs-kernel-server
+
+#chkconfig nfs on
+#service rpcbind start
+#service nfs start
+
+mkdir /software
+mkdir /scratch
+sudo chown nobody:nogroup /software
+sudo chown nobody:nogroup /scratch
+
+cp /local/repository/source/* /scratch
+
+## Create the permissions file for the NFS directory.
+#computes=$(($1 + 1))
+#for i in $(seq $computes)
+#do
+#  st='/software 192.168.1.'
+#  st+=$(($i))
+#  st+='(rw,sync,no_root_squash,no_subtree_check)'
+#  echo $st >> /etc/exports
+#done
 
 #echo "/software 192.168.1.2(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 #echo "/software 192.168.1.3(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
@@ -55,7 +77,7 @@ done
 #echo "/software 192.168.1.14(rw,sync,no_root_squash,no_subtree_check)" >> /etc/exports
 
 exportfs -a
-echo "Done" >> /users/jk880380/headdoneNFS.txt
+echo "Done" >> ~/headdoneNFS.txt
 
 set -x
 #sudo yum -y group install "Development Tools"
@@ -67,7 +89,7 @@ cd openmpi-3.1.2
 sudo ./configure --prefix=/software
 sudo make
 sudo make all install
-echo "export PATH='$PATH:/software/bin'" >> /users/jk880380/.bashrc
+echo "export PATH='$PATH:/software/bin'" >> ~/.bashrc
 echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/lib/'" >> /users/jk880380/.bashrc
 cd ..
 sudo rm -Rf openmpi-3.1.2
