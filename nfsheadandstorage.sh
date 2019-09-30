@@ -1,5 +1,25 @@
 #!/bin/sh
 
+# debconf
+sudo echo "slapd	slapd/internal/adminpw	password" | debconf-set-selections
+sudo echo "slapd	slapd/password2	password" | debconf-set-selections
+sudo echo "slapd	slapd/internal/generated_adminpw	password" | debconf-set-selections
+sudo echo "slapd	slapd/password1	password" | debconf-set-selections
+sudo echo "slapd	slapd/move_old_database	boolean	true" | debconf-set-selections
+sudo echo "slapd	slapd/purge_database	boolean	false" | debconf-set-selections
+sudo echo "slapd	slapd/no_configuration	boolean	false" | debconf-set-selections
+sudo echo "slapd	slapd/dump_database	select	when needed" | debconf-set-selections
+sudo echo "slapd	slapd/domain	string	csc.wcupa.edu" | debconf-set-selections
+sudo echo "slapd	slapd/ppolicy_schema_needs_update	select	abort installation" | debconf-set-selections
+sudo echo "slapd	slapd/dump_database_destdir	string	/var/backups/slapd-VERSION" | debconf-set-selections
+sudo echo "slapd	slapd/unsafe_selfwrite_acl	note" | debconf-set-selections
+sudo echo "slapd	shared/organization	string	West Chester University" | debconf-set-selections
+sudo echo "slapd	slapd/invalid_config	boolean	true" | debconf-set-selections
+sudo echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections
+sudo echo "slapd	slapd/backend	select	MDB" | debconf-set-selections
+sudo echo "slapd	slapd/password_mismatch	note" | debconf-set-selections
+
+
 apt-get install -y nfs-utils nfs-utils-lib
 #yum install -y nfs-utils nfs-utils-lib
 chkconfig nfs on
