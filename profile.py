@@ -29,6 +29,7 @@ tour.Description(IG.Tour.TEXT,tourDescription)
 request.addTour(tour)
 
 prefixForIP = "192.168.1."
+
 #maxSize = 5
 
 link = request.LAN("lan")
