@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # debconfs
+export DEBIAN_FRONTEND=noninteractive
 sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/bindpw rams" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/rootbindpw rams" | debconf-set-selections'
 sudo sh -c 'echo "libpam-runtime  libpam-runtime/profiles multiselect     unix, ldap, systemd, capability" | debconf-set-selections'
