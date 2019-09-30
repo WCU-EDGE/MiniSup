@@ -2,14 +2,14 @@
 
 # debconfs
 sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/bindpw rams" | debconf-set-selections'
-sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/rootbindpw     rams" | debconf-set-selections'
+sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/rootbindpw rams" | debconf-set-selections'
 sudo sh -c 'echo "libpam-runtime  libpam-runtime/profiles multiselect     unix, ldap, systemd, capability" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/ldapns/ldap-server	string	ldap:///192.168.1.1" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/ldapns/base-dn	string	dc=csc,dc=wcupa,dc=edu" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/move-to-debconf	boolean	true" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/rootbinddn	string	cn=admin,dc=csc,dc=wcupa,dc=edu" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/dblogin	boolean	false" | debconf-set-selections'
-sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/pam_password	select	md5" | debconf-set-selections'
+sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/pam_password	select md5" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/dbrootlogin	boolean	true" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/ldapns/ldap_version	select	3" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/binddn	string	cn=proxyuser,dc=example,dc=net" | debconf-set-selections'
