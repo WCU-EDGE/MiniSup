@@ -2,6 +2,7 @@
 set -x
 
 # debconf
+export DEBIAN_FRONTEND=noninteractive
 sudo sh -c 'echo "libssl1.0.0	libssl1.0.0/restart-failed	error" | debconf-set-selections'
 sudo sh -c 'echo "libssl1.0.0:amd64	libssl1.0.0/restart-failed	error	" | debconf-set-selections'
 sudo sh -c 'echo "libssl1.1	libraries/restart-without-asking	boolean	false" | debconf-set-selections'
