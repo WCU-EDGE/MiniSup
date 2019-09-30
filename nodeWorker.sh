@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# debconfs
+sudo echo "ldap-auth-config        ldap-auth-config/bindpw password" | debconf-set-selections
+sudo echo "ldap-auth-config        ldap-auth-config/rootbindpw     password" | debconf-set-selections
+sudo echo "libpam-runtime  libpam-runtime/profiles multiselect     unix, ldap, systemd, capability" | debconf-set-selections
 sudo echo "ldap-auth-config	ldap-auth-config/ldapns/ldap-server	string	ldap:///192.168.1.1" | debconf-set-selections
 sudo echo "ldap-auth-config	ldap-auth-config/ldapns/base-dn	string	dc=csc,dc=wcupa,dc=edu" | debconf-set-selections
 sudo echo "ldap-auth-config	ldap-auth-config/move-to-debconf	boolean	true" | debconf-set-selections
