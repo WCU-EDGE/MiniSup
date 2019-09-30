@@ -2,16 +2,16 @@
 set -x
 
 # debconf
-sudo echo "libssl1.0.0	libssl1.0.0/restart-failed	error" | sudo debconf-set-selections
-sudo echo "libssl1.0.0:amd64	libssl1.0.0/restart-failed	error	" | sudo debconf-set-selections
-sudo echo "libssl1.1	libraries/restart-without-asking	boolean	false" | sudo debconf-set-selections
-sudo echo "libssl1.1:amd64	libraries/restart-without-asking	boolean	false" | sudo debconf-set-selections
-sudo echo "libssl1.0.0	libssl1.0.0/restart-services	string	" | sudo debconf-set-selections
-sudo echo "libssl1.0.0:amd64	libssl1.0.0/restart-services	string	" | sudo debconf-set-selections
-sudo echo "libssl1.1	libssl1.1/restart-failed	error	" | sudo debconf-set-selections
-sudo echo "libssl1.1:amd64	libssl1.1/restart-failed	error	" | sudo debconf-set-selections
-sudo echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | sudo debconf-set-selections
-sudo echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | sudo debconf-set-selections
+sudo sh -c 'echo "libssl1.0.0	libssl1.0.0/restart-failed	error" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.0.0:amd64	libssl1.0.0/restart-failed	error	" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.1	libraries/restart-without-asking	boolean	false" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.1:amd64	libraries/restart-without-asking	boolean	false" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.0.0	libssl1.0.0/restart-services	string	" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.0.0:amd64	libssl1.0.0/restart-services	string	" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.1	libssl1.1/restart-failed	error	" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.1:amd64	libssl1.1/restart-failed	error	" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common tmux
