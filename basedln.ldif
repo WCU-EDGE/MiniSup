@@ -1,0 +1,12 @@
+dn: ou=People,dc=csc,dc=wcupa,dc=edu
+objectClass: organizationalUnit
+ou: People
+
+dn: ou=Groups,dc=csc,dc=wcupa,dc=edu
+objectClass: organizationalUnit
+ou: Groups
+
+dn: cn=CSC,ou=Groups,dc=csc,dc=wcupa,dc=edu
+objectClass: posixGroup
+cn: EDGESC
+gidNumber: 5000
