@@ -18,6 +18,16 @@ sudo echo "slapd	slapd/invalid_config	boolean	true" | debconf-set-selections
 sudo echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections
 sudo echo "slapd	slapd/backend	select	MDB" | debconf-set-selections
 sudo echo "slapd	slapd/password_mismatch	note" | debconf-set-selections
+sudo echo "libssl1.1       libssl1.1/restart-services      string  slapd openvpn ssh ntp" | debconf-set-selections
+sudo echo "libssl1.1:amd64 libssl1.1/restart-services      string  slapd openvpn ssh ntp" | debconf-set-selections
+sudo echo "libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections
+sudo echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections
+sudo echo "libssl1.1       libssl1.1/restart-failed        error" | debconf-set-selections
+sudo echo "libssl1.1:amd64 libssl1.1/restart-failed        error" | debconf-set-selections
+sudo echo "libssl1.0.0     libssl1.0.0/restart-failed      error" | debconf-set-selections
+sudo echo "libssl1.0.0:amd64       libssl1.0.0/restart-failed      error" | debconf-set-selections
+
+
 
 sudo apt-get update
 sudo apt-get install -y slapd ldap-utils
