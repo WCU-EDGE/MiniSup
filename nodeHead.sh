@@ -1,6 +1,7 @@
 #!/bin/sh
 
 # debconf
+export DEBIAN_FRONTEND=noninteractive
 sudo sh -c 'echo "slapd	slapd/internal/adminpw	rams" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/password1	rams" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/password2	rams" | debconf-set-selections'
