@@ -1,33 +1,33 @@
 #!/bin/sh
 
 # debconf
-sudo echo "slapd	slapd/internal/adminpw	password" | debconf-set-selections
-sudo echo "slapd	slapd/password2	password" | debconf-set-selections
-sudo echo "slapd	slapd/internal/generated_adminpw	password" | debconf-set-selections
-sudo echo "slapd	slapd/password1	password" | debconf-set-selections
-sudo echo "slapd	slapd/move_old_database	boolean	true" | debconf-set-selections
-sudo echo "slapd	slapd/purge_database	boolean	false" | debconf-set-selections
-sudo echo "slapd	slapd/no_configuration	boolean	false" | debconf-set-selections
-sudo echo "slapd	slapd/dump_database	select	when needed" | debconf-set-selections
-sudo echo "slapd	slapd/domain	string	csc.wcupa.edu" | debconf-set-selections
-sudo echo "slapd	slapd/ppolicy_schema_needs_update	select	abort installation" | debconf-set-selections
-sudo echo "slapd	slapd/dump_database_destdir	string	/var/backups/slapd-VERSION" | debconf-set-selections
-sudo echo "slapd	slapd/unsafe_selfwrite_acl	note" | debconf-set-selections
-sudo echo "slapd	shared/organization	string	West Chester University" | debconf-set-selections
-sudo echo "slapd	slapd/invalid_config	boolean	true" | debconf-set-selections
-sudo echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections
-sudo echo "slapd	slapd/backend	select	MDB" | debconf-set-selections
-sudo echo "slapd	slapd/password_mismatch	note" | debconf-set-selections
-#sudo echo "libssl1.1       libssl1.1/restart-services      string  slapd openvpn ssh ntp" | debconf-set-selections
-#sudo echo "libssl1.1:amd64 libssl1.1/restart-services      string  slapd openvpn ssh ntp" | debconf-set-selections
-sudo echo "libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections
-sudo echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections
-sudo echo "libssl1.1       libssl1.1/restart-failed        error" | debconf-set-selections
-sudo echo "libssl1.1:amd64 libssl1.1/restart-failed        error" | debconf-set-selections
-sudo echo "libssl1.0.0     libssl1.0.0/restart-failed      error" | debconf-set-selections
-sudo echo "libssl1.0.0:amd64       libssl1.0.0/restart-failed      error" | debconf-set-selections
-sudo echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections
-sudo echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections
+sudo echo "slapd	slapd/internal/adminpw	password" | sudo debconf-set-selections
+sudo echo "slapd	slapd/password2	password" | sudo debconf-set-selections
+sudo echo "slapd	slapd/internal/generated_adminpw	password" | sudo debconf-set-selections
+sudo echo "slapd	slapd/password1	password" | sudo debconf-set-selections
+sudo echo "slapd	slapd/move_old_database	boolean	true" | sudo debconf-set-selections
+sudo echo "slapd	slapd/purge_database	boolean	false" | sudo debconf-set-selections
+sudo echo "slapd	slapd/no_configuration	boolean	false" | sudo debconf-set-selections
+sudo echo "slapd	slapd/dump_database	select	when needed" | sudo debconf-set-selections
+sudo echo "slapd	slapd/domain	string	csc.wcupa.edu" | sudo debconf-set-selections
+sudo echo "slapd	slapd/ppolicy_schema_needs_update	select	abort installation" | sudo debconf-set-selections
+sudo echo "slapd	slapd/dump_database_destdir	string	/var/backups/slapd-VERSION" | sudo debconf-set-selections
+sudo echo "slapd	slapd/unsafe_selfwrite_acl	note" | sudo debconf-set-selections
+sudo echo "slapd	shared/organization	string	West Chester University" | sudo debconf-set-selections
+sudo echo "slapd	slapd/invalid_config	boolean	true" | sudo debconf-set-selections
+sudo echo "slapd	slapd/upgrade_slapcat_failure	error" | sudo debconf-set-selections
+sudo echo "slapd	slapd/backend	select	MDB" | sudo debconf-set-selections
+sudo echo "slapd	slapd/password_mismatch	note" | sudo debconf-set-selections
+#sudo echo "libssl1.1       libssl1.1/restart-services      string  slapd openvpn ssh ntp" | sudo debconf-set-selections
+#sudo echo "libssl1.1:amd64 libssl1.1/restart-services      string  slapd openvpn ssh ntp" | sudo debconf-set-selections
+sudo echo "libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | sudo debconf-set-selections
+sudo echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | sudo debconf-set-selections
+sudo echo "libssl1.1       libssl1.1/restart-failed        error" | sudo debconf-set-selections
+sudo echo "libssl1.1:amd64 libssl1.1/restart-failed        error" | sudo debconf-set-selections
+sudo echo "libssl1.0.0     libssl1.0.0/restart-failed      error" | sudo debconf-set-selections
+sudo echo "libssl1.0.0:amd64       libssl1.0.0/restart-failed      error" | sudo debconf-set-selections
+sudo echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | sudo debconf-set-selections
+sudo echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | sudo debconf-set-selections
 
 
 sudo apt-get update
