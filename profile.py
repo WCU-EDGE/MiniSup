@@ -7,7 +7,7 @@ import geni.rspec.igext as IG
 # Create a portal context.
 pc = portal.Context()
 
-pc.defineParameter( "n", "Number of compute nodes, a number from 2 to 12", portal.ParameterType.INTEGER, 4 )
+pc.defineParameter( "n", "Number of worker nodes, a number from 2 to 5", portal.ParameterType.INTEGER, 4 )
 params = pc.bindParameters()
 
 # Create a Request object to start building the RSpec.
@@ -33,7 +33,9 @@ prefixForIP = "192.168.1."
 
 link = request.LAN("lan")
 
-for i in range(5):
+# Make n+2 when the process scheduler is brought into the network.
+# Also update the nfs ip addresses in nodeHead at that time.
+for i in range(0,params.n + 1):
   if i == 0:
     node = request.XenVM("head")
   else:
@@ -61,16 +63,12 @@ for i in range(5):
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
   
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
+  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
+  #node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHead.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
-    #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfshead.sh"))
-    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfshead.sh " + str(params.n)))
-    #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfsstorage.sh"))
-    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfsstorage.sh " + str(params.n)))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeWorker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeWorker.sh"))
