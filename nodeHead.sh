@@ -18,6 +18,8 @@ export DEBIAN_FRONTEND=noninteractive
 #sudo sh -c 'echo "slapd	slapd/password1	rams" | debconf-set-selections'
 #sudo sh -c 'echo "slapd	slapd/password2	rams" | debconf-set-selections'
 
+sudo sh -c 'echo "slapd slapd/root_password password  rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd slapd/root_password_again password rams" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/internal/adminpw  password  rams" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/password1 password	rams" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/password2 password	rams" | debconf-set-selections'
