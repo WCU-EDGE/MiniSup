@@ -46,12 +46,32 @@ sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string
 sudo sh -c 'echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 
+###
+echo -e "slapd slapd/root_password password goldenram" |debconf-set-selections
+echo -e "slapd slapd/root_password_again password goldenram" |debconf-set-selections
+echo -e "slapd slapd/internal/adminpw password goldenram" |debconf-set-selections
+echo -e "slapd slapd/internal/generated_adminpw password goldenram" |debconf-set-selections
+echo -e "slapd slapd/password2 password goldenram" |debconf-set-selections
+echo -e "slapd slapd/password1 password goldenram" |debconf-set-selections
+echo -e "slapd slapd/domain string golden.ram" |debconf-set-selections
+echo -e "slapd shared/organization string CSC" |debconf-set-selections
+echo -e "slapd slapd/backend string HDB" |debconf-set-selections
+echo -e "slapd slapd/purge_database boolean true" |debconf-set-selections
+echo -e "slapd slapd/move_old_database boolean true" |debconf-set-selections
+echo -e "slapd slapd/allow_ldap_v2 boolean false" |debconf-set-selections
+echo -e "slapd slapd/no_configuration boolean false" |debconf-set-selections
+###
+
 sudo apt-get update
 sudo apt-get install -y slapd ldap-utils
 sudo dpkg-reconfigure slapd
 sudo ufw allow ldap
+
+echo 'ldapadd 1'
 ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/basedln.ldif
+echo 'ldapadd 2'
 ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/users.ldif
+echo 'ldapadd end'
 
 sudo apt-get install -y nfs-kernel-server
 #apt-get install -y nfs-utils nfs-utils-lib
