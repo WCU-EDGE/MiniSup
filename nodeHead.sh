@@ -11,8 +11,10 @@ sudo chmod -R 777 /scratch
 sudo chmod -R 777 /home
 sudo chmod -R a+rx /opt
 
-# debconf
+sudo apt-get update
 sudo apt-get install -y debconf-utils
+
+# debconf
 export DEBIAN_FRONTEND=noninteractive
 
 ##sudo sh -c 'echo "slapd	slapd/internal/adminpw	rams" | debconf-set-selections'
@@ -47,7 +49,6 @@ sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string
 sudo sh -c 'echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 
-sudo apt-get update
 sudo apt-get install -y slapd ldap-utils
 sudo dpkg-reconfigure slapd
 sudo ufw allow ldap
