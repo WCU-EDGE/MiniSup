@@ -21,16 +21,19 @@ export DEBIAN_FRONTEND=noninteractive
 ##sudo sh -c 'echo "slapd	slapd/password1	rams" | debconf-set-selections'
 ##sudo sh -c 'echo "slapd	slapd/password2	rams" | debconf-set-selections'
 
-sudo debconf-set-selections <<< 'slapd slapd/root_password password rams'
-sudo debconf-set-selections <<< 'slapd slapd/root_password_again password rams'
-sudo debconf-set-selections <<< 'slapd slapd/generated_adminpw password rams'
-sudo debconf-set-selections <<< 'slapd slapd/adminpw password rams'
 #sudo sh -c 'echo "slapd slapd/root_password password rams" | debconf-set-selections'
 #sudo sh -c 'echo "slapd slapd/root_password_again password rams" | debconf-set-selections'
 #sudo sh -c 'echo "slapd slapd/internal/generated_adminpw password rams" | debconf-set-selections'
 #sudo sh -c 'echo "slapd slapd/internal/adminpw password rams" | debconf-set-selections'
 #sudo sh -c 'echo "slapd slapd/password1 password rams" | debconf-set-selections'
 #sudo sh -c 'echo "slapd slapd/password2 password rams" | debconf-set-selections'
+
+echo 'slapd slapd/root_password password rams' | sudo debconf-set-selections
+echo 'slapd slapd/root_password_again password rams' | sudo debconf-set-selections
+echo 'slapd slapd/internal/generated_adminpw password rams' | sudo debconf-set-selections
+echo 'slapd slapd/internal/adminpw password rams' | sudo debconf-set-selections
+echo 'slapd slapd/password1 password rams' | sudo debconf-set-selections
+echo 'slapd slapd/password2 password rams' | sudo debconf-set-selections
 
 sudo sh -c 'echo "slapd slapd/move_old_database boolean true" | debconf-set-selections'
 sudo sh -c 'echo "slapd slapd/purge_database boolean false" | debconf-set-selections'
