@@ -1,5 +1,16 @@
 #!/bin/sh
 
+mkdir /software
+mkdir /scratch
+sudo chown nobody:nogroup /software
+sudo chown nobody:nogroup /scratch
+sudo chown nobody:nogroup /home
+
+sudo chmod -R a+rx /software
+sudo chmod -R 777 /scratch
+sudo chmod -R 777 /home
+sudo chmod -R a+rx /opt
+
 # debconf
 export DEBIAN_FRONTEND=noninteractive
 sudo sh -c 'echo "slapd	slapd/internal/adminpw	rams" | debconf-set-selections'
@@ -38,18 +49,6 @@ ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldap/users
 sudo apt-get install -y nfs-kernel-server
 #apt-get install -y nfs-utils nfs-utils-lib
 #yum install -y nfs-utils nfs-utils-lib
-
-sudo chown nobody:nogroup /home
-
-mkdir /software
-mkdir /scratch
-sudo chown nobody:nogroup /software
-sudo chown nobody:nogroup /scratch
-
-sudo chmod -R a+rx /software
-sudo chmod -R 777 /scratch
-sudo chmod -R 777 /home
-sudo chmod -R a+rx /opt
 
 # Create the permissions file for the NFS directory.
 computes=$(($1 + 1))
