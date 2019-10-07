@@ -12,55 +12,40 @@ sudo chmod -R 777 /home
 sudo chmod -R a+rx /opt
 
 # debconf
+sudo apt-get install debconf-utils
 export DEBIAN_FRONTEND=noninteractive
 
 ##sudo sh -c 'echo "slapd	slapd/internal/adminpw	rams" | debconf-set-selections'
 ##sudo sh -c 'echo "slapd	slapd/password1	rams" | debconf-set-selections'
 ##sudo sh -c 'echo "slapd	slapd/password2	rams" | debconf-set-selections'
-#
-#sudo sh -c 'echo "slapd slapd/root_password password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd slapd/root_password_again password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/internal/adminpw password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/password1 password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/password2 password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/internal/generated_adminpw password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/move_old_database boolean true" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/purge_database boolean false" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/no_configuration boolean false" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/dump_database	select	when needed" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/domain string csc.wcupa.edu" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/ppolicy_schema_needs_update	select	abort installation" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/dump_database_destdir	string	/var/backups/slapd-VERSION" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/unsafe_selfwrite_acl	note" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	shared/organization	string	West Chester University" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/invalid_config	boolean	true" | debconf-set-selections'
-##sudo sh -c 'echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/backend	select	MDB" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/password_mismatch	note" | debconf-set-selections'
-#sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections'
-#sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections'
-##sudo sh -c 'echo "libssl1.1       libssl1.1/restart-failed        error" | debconf-set-selections'
-##sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-failed        error" | debconf-set-selections'
-##sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-failed      error" | debconf-set-selections'
-##sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-failed      error" | debconf-set-selections'
-#sudo sh -c 'echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
-#sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 
-###
-echo -e "slapd slapd/root_password password goldenram" |debconf-set-selections
-echo -e "slapd slapd/root_password_again password goldenram" |debconf-set-selections
-echo -e "slapd slapd/internal/adminpw password goldenram" |debconf-set-selections
-echo -e "slapd slapd/internal/generated_adminpw password goldenram" |debconf-set-selections
-echo -e "slapd slapd/password2 password goldenram" |debconf-set-selections
-echo -e "slapd slapd/password1 password goldenram" |debconf-set-selections
-echo -e "slapd slapd/domain string golden.ram" |debconf-set-selections
-echo -e "slapd shared/organization string CSC" |debconf-set-selections
-echo -e "slapd slapd/backend string HDB" |debconf-set-selections
-echo -e "slapd slapd/purge_database boolean true" |debconf-set-selections
-echo -e "slapd slapd/move_old_database boolean true" |debconf-set-selections
-echo -e "slapd slapd/allow_ldap_v2 boolean false" |debconf-set-selections
-echo -e "slapd slapd/no_configuration boolean false" |debconf-set-selections
-###
+sudo sh -c 'echo "slapd slapd/root_password password rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd slapd/root_password_again password rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/internal/adminpw password rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/password1 password rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/password2 password rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/internal/generated_adminpw password rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/move_old_database boolean true" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/purge_database boolean false" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/no_configuration boolean false" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/dump_database	select	when needed" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/domain string csc.wcupa.edu" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/ppolicy_schema_needs_update	select	abort installation" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/dump_database_destdir	string	/var/backups/slapd-VERSION" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/unsafe_selfwrite_acl	note" | debconf-set-selections'
+sudo sh -c 'echo "slapd	shared/organization	string	West Chester University" | debconf-set-selections'
+#sudo sh -c 'echo "slapd	slapd/invalid_config	boolean	true" | debconf-set-selections'
+#sudo sh -c 'echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/backend	select	MDB" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/password_mismatch	note" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections'
+#sudo sh -c 'echo "libssl1.1       libssl1.1/restart-failed        error" | debconf-set-selections'
+#sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-failed        error" | debconf-set-selections'
+#sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-failed      error" | debconf-set-selections'
+#sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-failed      error" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
+sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 
 sudo apt-get update
 sudo apt-get install -y slapd ldap-utils
