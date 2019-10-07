@@ -72,6 +72,21 @@ sudo systemctl restart nfs-kernel-server
 # Copy, if exists.
 cp /local/repository/source/* /scratch || true
 
+# Next step: MPI ####################
+cd /software
+sudo wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.2.tar.gz
+sudo tar xzf openmpi-3.1.2.tar.gz
+cd openmpi-3.1.2
+sudo ./configure --prefix=/software
+sudo make
+sudo make all install
+echo "export PATH='$PATH:/software/bin'" >> /users/jk880380/.bashrc
+echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/lib/'" >> /users/jk880380/.bashrc
+cd ..
+sudo rm -Rf openmpi-3.1.2
+sudo rm -Rf openmpi-3.1.2.tar.gz
+echo "Done" >> /users/jk880380/headdoneMPI.txt
+
 ## Create the permissions file for the NFS directory.
 #computes=$(($1 + 1))
 #for i in $(seq $computes)
@@ -85,25 +100,7 @@ cp /local/repository/source/* /scratch || true
 #exportfs -a
 #echo "Done" >> /users/jk880380/headdoneNFS.txt
 
-# Next step: MPI ####################
-#set -x
-##sudo yum -y group install "Development Tools"
-#sudo apt-get -y group install "Development Tools"
-#
-#cd /software
-#sudo wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.2.tar.gz
-#sudo tar xzf openmpi-3.1.2.tar.gz
-#cd openmpi-3.1.2
-#sudo ./configure --prefix=/software
-#sudo make
-#sudo make all install
-#echo "export PATH='$PATH:/software/bin'" >> /users/jk880380/.bashrc
-#echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/lib/'" >> /users/jk880380/.bashrc
-#cd ..
-#sudo rm -Rf openmpi-3.1.2
-#sudo rm -Rf openmpi-3.1.2.tar.gz
-##mkdir /software/flagdir
-#echo "Done" >> /users/jk880380/headdoneMPI.txt
+
 
 # Storage.
 
