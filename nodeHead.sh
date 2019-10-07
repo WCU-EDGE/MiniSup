@@ -34,15 +34,15 @@ sudo sh -c 'echo "slapd	slapd/dump_database_destdir	string	/var/backups/slapd-VE
 sudo sh -c 'echo "slapd	slapd/unsafe_selfwrite_acl	note" | debconf-set-selections'
 sudo sh -c 'echo "slapd	shared/organization	string	West Chester University" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/invalid_config	boolean	true" | debconf-set-selections'
-sudo sh -c 'echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections'
+#sudo sh -c 'echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/backend	select	MDB" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/password_mismatch	note" | debconf-set-selections'
 sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections'
 sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1       libssl1.1/restart-failed        error" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-failed        error" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-failed      error" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-failed      error" | debconf-set-selections'
+#sudo sh -c 'echo "libssl1.1       libssl1.1/restart-failed        error" | debconf-set-selections'
+#sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-failed        error" | debconf-set-selections'
+#sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-failed      error" | debconf-set-selections'
+#sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-failed      error" | debconf-set-selections'
 sudo sh -c 'echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
 
@@ -50,8 +50,8 @@ sudo apt-get update
 sudo apt-get install -y slapd ldap-utils
 sudo dpkg-reconfigure slapd
 sudo ufw allow ldap
-ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldap/basedn.ldif
-ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldap/users.ldif
+ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/basedln.ldif
+ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/users.ldif
 
 sudo apt-get install -y nfs-kernel-server
 #apt-get install -y nfs-utils nfs-utils-lib
