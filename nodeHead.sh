@@ -46,6 +46,11 @@ mkdir /scratch
 sudo chown nobody:nogroup /software
 sudo chown nobody:nogroup /scratch
 
+sudo chmod -R a+rx /software
+sudo chmod -R 777 /scratch
+sudo chmod -R 777 /home
+sudo chmod -R a+rx /opt
+
 # Create the permissions file for the NFS directory.
 computes=$(($1 + 1))
 for i in $(seq 2 $computes)
