@@ -2,8 +2,12 @@
 
 # debconfs
 export DEBIAN_FRONTEND=noninteractive
-sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/bindpw rams" | debconf-set-selections'
-sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/rootbindpw rams" | debconf-set-selections'
+
+#sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/bindpw rams" | debconf-set-selections'
+#sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/rootbindpw rams" | debconf-set-selections'
+
+sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/bindpw string rams" | debconf-set-selections'
+sudo sh -c 'echo "ldap-auth-config        ldap-auth-config/rootbindpw string rams" | debconf-set-selections'
 sudo sh -c 'echo "libpam-runtime  libpam-runtime/profiles multiselect     unix, ldap, systemd, capability" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/ldapns/ldap-server	string	ldap:///192.168.1.1" | debconf-set-selections'
 sudo sh -c 'echo "ldap-auth-config	ldap-auth-config/ldapns/base-dn	string	dc=csc,dc=wcupa,dc=edu" | debconf-set-selections'
