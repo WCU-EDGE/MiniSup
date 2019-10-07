@@ -18,9 +18,9 @@ export DEBIAN_FRONTEND=noninteractive
 #sudo sh -c 'echo "slapd	slapd/password1	rams" | debconf-set-selections'
 #sudo sh -c 'echo "slapd	slapd/password2	rams" | debconf-set-selections'
 
-sudo sh -c 'echo "slapd	slapd/internal/adminpw  string  rams" | debconf-set-selections'
-sudo sh -c 'echo "slapd	slapd/password1 string	rams" | debconf-set-selections'
-sudo sh -c 'echo "slapd	slapd/password2 string	rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/internal/adminpw  password  rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/password1 password	rams" | debconf-set-selections'
+sudo sh -c 'echo "slapd	slapd/password2 password	rams" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/internal/generated_adminpw string	rams" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/move_old_database	boolean	true" | debconf-set-selections'
 sudo sh -c 'echo "slapd	slapd/purge_database	boolean	false" | debconf-set-selections'
