@@ -12,7 +12,7 @@ sudo chmod -R 777 /home
 sudo chmod -R a+rx /opt
 
 # debconf
-sudo apt-get install debconf-utils
+sudo apt-get install -y debconf-utils
 export DEBIAN_FRONTEND=noninteractive
 
 ##sudo sh -c 'echo "slapd	slapd/internal/adminpw	rams" | debconf-set-selections'
