@@ -88,7 +88,7 @@ sudo systemctl restart nfs-kernel-server
 #service nfs start
 
 # Correctly set the LDAP password.
-sudo /local/repository/source/nodeHeadLdapPwd.sh
+sudo /local/repository/nodeHeadLdapPwd.sh
 
 # Copy, if exists.
 cp /local/repository/source/* /scratch || true
