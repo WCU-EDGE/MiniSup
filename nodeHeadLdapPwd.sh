@@ -12,12 +12,12 @@ sudo /usr/sbin/slappasswd -h {SSHA} -T inputpwd >> updpasswd.ldif
 sudo rm inputpwd
 sudo sed -i '$ s/{SSHA}/olcRootPW: {SSHA}/g' updpasswd.ldif
 #sudo ldapmodify -H ldapi:// -Y EXTERNAL -f updpasswd.ldif
-sudo ldapmodify -H ldap:// -Y EXTERNAL -f updpasswd.ldif
+sudo ldapmodify -H ldap://192.168.1.1 -Y EXTERNAL -f updpasswd.ldif
 sudo sed -i '1 s/^.*$/dn: cn=admin,dc=csc,dc=wcupa,dc=edu/' updpasswd.ldif
 sudo sed -i 's/replace: oldRootPW/replace: userPassword/g' updpasswd.ldif
 sudo sed -i 's/olcRootPW: {SSHA}/userPassword: {SSHA}/g' updpasswd.ldif
 
-ldapmodify -H ldap:// -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -W -f updpasswd.ldif
+ldapmodify -H ldap://192.168.1.1 -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -W -f updpasswd.ldif
 
 echo '#!/usr/bin/expect -f' > ldapexpect.sh
 echo 'set timeout -1' >> ldapexpect.sh
