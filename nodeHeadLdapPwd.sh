@@ -2,7 +2,8 @@
 
 sudo apt-get install -y expect
 
-sudo ldapsearch -H ldapi:// -LLL -Q -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" dn olcRootDN olcRootPW | tee updpasswd.ldif
+#sudo ldapsearch -H ldapi:// -LLL -Q -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" dn olcRootDN olcRootPW | tee updpasswd.ldif
+sudo ldapsearch -H ldap:// -LLL -Q -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" dn olcRootDN olcRootPW | tee updpasswd.ldif
 
 sudo sed -i 's/olcRootPW/changetype: modify\nreplace: olcRootPW\n#olcRootPW/g' updpasswd.ldif
 sudo sed -i 's/olcRootDN/#olcRootDN/g' updpasswd.ldif
@@ -10,7 +11,8 @@ sudo printf "rams" > inputpwd
 sudo /usr/sbin/slappasswd -h {SSHA} -T inputpwd >> updpasswd.ldif
 sudo rm inputpwd
 sudo sed -i '$ s/{SSHA}/olcRootPW: {SSHA}/g' updpasswd.ldif
-sudo ldapmodify -H ldapi:// -Y EXTERNAL -f updpasswd.ldif
+#sudo ldapmodify -H ldapi:// -Y EXTERNAL -f updpasswd.ldif
+sudo ldapmodify -H ldap:// -Y EXTERNAL -f updpasswd.ldif
 sudo sed -i '1 s/^.*$/dn: cn=admin,dc=csc,dc=wcupa,dc=edu/' updpasswd.ldif
 sudo sed -i 's/replace: oldRootPW/replace: userPassword/g' updpasswd.ldif
 sudo sed -i 's/olcRootPW: {SSHA}/userPassword: {SSHA}/g' updpasswd.ldif
