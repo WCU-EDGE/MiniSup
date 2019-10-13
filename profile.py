@@ -69,6 +69,7 @@ for i in range(0,params.n + 1):
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHead.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHeadLdapPwd.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeWorker.sh"))
