@@ -61,6 +61,12 @@ sudo apt-get install -y slapd ldap-utils
 sudo dpkg-reconfigure slapd
 sudo ufw allow ldap
 
+
+# Correctly set the LDAP password.
+echo 'running nodeHeadLdapPwd.sh'
+sudo /local/repository/nodeHeadLdapPwd.sh
+echo 'done nodeHeadLdapPwd.sh'
+
 echo 'ldapadd 1'
 ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/basedln.ldif
 echo 'ldapadd 2'
@@ -87,8 +93,6 @@ sudo systemctl restart nfs-kernel-server
 #service rpcbind start
 #service nfs start
 
-# Correctly set the LDAP password.
-sudo /local/repository/nodeHeadLdapPwd.sh
 
 # Copy, if exists.
 cp /local/repository/source/* /scratch || true
