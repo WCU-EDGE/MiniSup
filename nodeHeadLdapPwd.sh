@@ -6,7 +6,7 @@ sudo ldapsearch -H ldapi:// -LLL -Q -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" d
 
 sudo sed -i 's/olcRootPW/changetype: modify\nreplace: olcRootPW\n#olcRootPW/g' updpasswd.ldif
 sudo sed -i 's/olcRootDN/#olcRootDN/g' updpasswd.ldif
-sudo echo rams > inputpwd
+sudo printf "rams" > inputpwd
 sudo /usr/sbin/slappasswd -h {SSHA} -T inputpwd >> updpasswd.ldif
 sudo rm inputpwd
 sudo sed -i '$ s/{SSHA}/olcRootPW: {SSHA}/g' updpasswd.ldif
