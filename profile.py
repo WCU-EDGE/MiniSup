@@ -34,11 +34,14 @@ prefixForIP = "192.168.1."
 
 link = request.LAN("lan")
 
-# Make n+2 when the process scheduler is brought into the network.
+# Make n+3 when the process scheduler is brought into the network.
 # Also update the nfs ip addresses in nodeHead at that time.
-for i in range(0,params.n + 1):
+###for i in range(0,params.n + 1):
+for i in range(0,params.n + 2):
   if i == 0:
     node = request.XenVM("head")
+  elif i == 1:
+    node = request.XenVM("beenode")
   else:
     node = request.XenVM("worker-" + str(i))
   node.cores = 4
@@ -70,9 +73,14 @@ for i in range(0,params.n + 1):
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHead.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHeadLdapPwd.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
+  elif i == 1:
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/serverBeeGFS.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh"))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeWorker.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeWorker.sh"))
   
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_docker.sh"))
