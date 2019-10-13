@@ -32,6 +32,8 @@ prefixForIP = "192.168.1."
 
 #maxSize = 5
 
+beegfnNum = params.n + 1
+
 link = request.LAN("lan")
 
 # Make n+3 when the process scheduler is brought into the network.
@@ -40,7 +42,7 @@ link = request.LAN("lan")
 for i in range(0,params.n + 2):
   if i == 0:
     node = request.XenVM("head")
-  elif i == 1:
+  elif i == beegfnNum:
     node = request.XenVM("beenode")
   else:
     node = request.XenVM("worker-" + str(i))
@@ -76,7 +78,7 @@ for i in range(0,params.n + 2):
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
-  elif i == 1:
+  elif i == beegfnNum:
     node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/serverBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh"))
   else:
