@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install expect
+sudo apt-get install -y expect
 
 sudo ldapsearch -H ldapi:// -LLL -Q -Y EXTERNAL -b "cn=config" "(olcRootDN=*)" dn olcRootDN olcRootPW | tee updpasswd.ldif
 
