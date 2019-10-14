@@ -84,7 +84,7 @@ for i in range(0,params.n + 2):
     node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
   elif i == beegfnNum:
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(params.n)))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeWorker.sh"))
