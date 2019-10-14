@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # https://www.beegfs.io/wiki/ManualInstallWalkThrough
 
