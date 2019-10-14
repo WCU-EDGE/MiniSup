@@ -14,3 +14,6 @@ sudo systemctl start beegfs-client
 
 sleep 180
 sudo ln -s /mnt/beegfs /scratch
+
+# Copy, if exists.
+cp /local/repository/source/* /scratch || true
