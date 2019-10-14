@@ -1,13 +1,13 @@
 #!/bin/sh
 
 mkdir /software
-mkdir /scratch
+#mkdir /scratch
 sudo chown nobody:nogroup /software
-sudo chown nobody:nogroup /scratch
+#sudo chown nobody:nogroup /scratch
 sudo chown nobody:nogroup /home
 
 sudo chmod -R a+rx /software
-sudo chmod -R 777 /scratch
+#sudo chmod -R 777 /scratch
 sudo chmod -R 777 /home
 sudo chmod -R a+rx /opt
 
@@ -84,7 +84,7 @@ do
   echo "/home 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
   echo "/opt 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
   echo "/software 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
-  echo "/scratch 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
+  #echo "/scratch 192.168.1.$i(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
 done
 
 sudo systemctl restart nfs-kernel-server
@@ -94,8 +94,8 @@ sudo systemctl restart nfs-kernel-server
 #service nfs start
 
 
-# Copy, if exists.
-cp /local/repository/source/* /scratch || true
+## Copy, if exists.
+#cp /local/repository/source/* /scratch || true
 
 ## Next step: MPI ####################
 #cd /software
