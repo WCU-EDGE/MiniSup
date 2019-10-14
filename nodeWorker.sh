@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+### #!/bin/sh
 
 # debconfs
 export DEBIAN_FRONTEND=noninteractive
