@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # https://www.beegfs.io/wiki/ManualInstallWalkThrough
 
 ### Name the machine beenode
