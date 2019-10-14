@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/bash
+
+### #!/bin/sh
 
 mkdir /software
 #mkdir /scratch
