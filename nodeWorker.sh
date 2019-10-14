@@ -54,9 +54,9 @@ sleep 600
 sudo mount 192.168.1.1:/home /home
 sudo mount 192.168.1.1:/opt /opt
 sudo mount 192.168.1.1:/software /software
-sudo mount 192.168.1.1:/scratch /scratch
-#mount -t nfs 192.168.1.1:/software /software
-#mount -t nfs 192.168.1.2:/scratch /scratch
+#sudo mount 192.168.1.1:/scratch /scratch
+##mount -t nfs 192.168.1.1:/software /software
+##mount -t nfs 192.168.1.2:/scratch /scratch
 
 #while [ ! -d /software/flagdir ]
 #do
