@@ -13,7 +13,9 @@ sudo systemctl start beegfs-helperd
 sudo systemctl start beegfs-client
 
 sleep 180
+LOCALHOSTNAME=$(echo $HOSTNAME | awk -F'.' '{print $1}')
 sudo ln -s /mnt/beegfs /scratch
+sudo mkdir /scratch/$LOCALHOSTNAME
 
 # Copy, if exists.
-cp /local/repository/source/* /scratch || true
+cp /local/repository/source/* /scratch/$LOCALHOSTNAME || true
