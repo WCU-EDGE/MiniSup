@@ -2,6 +2,8 @@
 
 ### #!/bin/sh
 
+echo 'nodeWorker.sh'
+
 # debconfs
 export DEBIAN_FRONTEND=noninteractive
 
