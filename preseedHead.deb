@@ -18,9 +18,5 @@ slapd slapd/password_mismatch	note
 
 libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp
 libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp
-libssl1.1       libssl1.1/restart-failed        error
-libssl1.1:amd64 libssl1.1/restart-failed        error
-libssl1.0.0     libssl1.0.0/restart-failed      error
-libssl1.0.0:amd64       libssl1.0.0/restart-failed      error
 libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2
 libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2
