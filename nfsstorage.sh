@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo 'nfsstorage.sh'
+
 apt-get install -y nfs-utils nfs-utils-lib
 #yum install -y nfs-utils nfs-utils-lib
 chkconfig nfs on
