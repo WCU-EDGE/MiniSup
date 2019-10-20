@@ -9,7 +9,7 @@ cn: merino
 displayName: merino
 uidNumber: 10000
 gidNumber: 5000
-userPassword: {SSHA}TOL9DTDPu3A7C6VwpRHIBp7EhJWCjhCY
+userPassword: "$(slappasswd -s rams)"
 gecos: Golden Merino
 loginShell: /bin/bash
 homeDirectory: /home/merino
@@ -25,7 +25,7 @@ cn: dorper
 displayName: dorper
 uidNumber: 10001
 gidNumber: 5000
-userPassword: {SSHA}TOL9DTDPu3A7C6VwpRHIBp7EhJWCjhCY
+userPassword: "$(slappasswd -s rams)"
 gecos: Golden Dorper
 loginShell: /bin/bash
 homeDirectory: /home/dorper
@@ -41,7 +41,7 @@ cn: tester
 displayName: tester
 uidNumber: 10002
 gidNumber: 5000
-userPassword: {SSHA}TOL9DTDPu3A7C6VwpRHIBp7EhJWCjhCY
+userPassword: "$(slappasswd -s rams)"
 gecos: Golden Tester
 loginShell: /bin/bash
 homeDirectory: /home/tester
