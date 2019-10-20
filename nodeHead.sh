@@ -35,8 +35,11 @@ sudo ufw allow ldap
 #echo 'done nodeHeadLdapPwd.sh'
 
 sudo /local/repository/ldif/createUsersLdif.sh
-sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldif/basedln.ldif
-sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/users.ldif
+sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -w rams -f /local/repository/ldif/basedln.ldif
+sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -w rams -f /local/repository/users.ldif
+
+#sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldif/basedln.ldif
+#sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/users.ldif
 
 sudo apt-get install -y nfs-kernel-server
 #apt-get install -y nfs-utils nfs-utils-lib
