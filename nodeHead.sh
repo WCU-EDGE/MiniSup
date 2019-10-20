@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 ### #!/bin/sh
 
@@ -33,10 +34,12 @@ sudo ufw allow ldap
 #sudo /local/repository/nodeHeadLdapPwd.sh
 #echo 'done nodeHeadLdapPwd.sh'
 
+echo 'ldapadd 0'
+sudo /local/repository/ldif/createUsersLdif.sh
 echo 'ldapadd 1'
-ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/basedln.ldif
+sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldif/basedln.ldif
 echo 'ldapadd 2'
-ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/users.ldif
+sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/users.ldif
 echo 'ldapadd end'
 
 sudo apt-get install -y nfs-kernel-server
