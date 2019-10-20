@@ -2,7 +2,7 @@
 
 echo 'createUsersLdif'
 
-cat <<EOF > /local/repository/nfs-users.ldif
+cat <<EOF > /local/repository/users.ldif
 dn: uid=merino,ou=People,dc=csc,dc=wcupa,dc=edu
 objectClass: inetOrgPerson
 objectClass: posixAccount
