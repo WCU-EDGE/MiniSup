@@ -34,8 +34,6 @@ sudo ufw allow ldap
 #sudo /local/repository/nodeHeadLdapPwd.sh
 #echo 'done nodeHeadLdapPwd.sh'
 
-echo 'ldapadd 0'
-sudo /local/repository/ldif/createUsersLdif.sh
 echo 'ldapadd 1'
 sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldif/basedln.ldif
 echo 'ldapadd 2'
