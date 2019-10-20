@@ -1,18 +1,13 @@
 #!/bin/bash
 set -x
 
+echo 'install_docker.sh'
+
 # debconf
+echo 'debconf start'
 export DEBIAN_FRONTEND=noninteractive
-sudo sh -c 'echo "libssl1.0.0	libssl1.0.0/restart-failed	error" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.0.0:amd64	libssl1.0.0/restart-failed	error	" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1	libraries/restart-without-asking	boolean	false" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1:amd64	libraries/restart-without-asking	boolean	false" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.0.0	libssl1.0.0/restart-services	string	" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.0.0:amd64	libssl1.0.0/restart-services	string	" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1	libssl1.1/restart-failed	error	" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1:amd64	libssl1.1/restart-failed	error	" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
+cat /local/repository/preseedDocker.deb | sudo debconf-set-selections
+echo 'debconf end'
 
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common tmux
