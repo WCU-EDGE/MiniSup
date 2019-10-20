@@ -17,57 +17,19 @@ sudo apt-get update
 sudo apt-get install -y debconf-utils
 
 # debconf
+echo 'debconf start'
 export DEBIAN_FRONTEND=noninteractive
-
-##sudo sh -c 'echo "slapd	slapd/internal/adminpw	rams" | debconf-set-selections'
-##sudo sh -c 'echo "slapd	slapd/password1	rams" | debconf-set-selections'
-##sudo sh -c 'echo "slapd	slapd/password2	rams" | debconf-set-selections'
-
-#sudo sh -c 'echo "slapd slapd/root_password password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd slapd/root_password_again password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd slapd/internal/generated_adminpw password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd slapd/internal/adminpw password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd slapd/password1 password rams" | debconf-set-selections'
-#sudo sh -c 'echo "slapd slapd/password2 password rams" | debconf-set-selections'
-
-echo 'slapd slapd/root_password password {SSHA}/AWY/9LoQPQ4/rBfU3Wr7NtfZQ3PqNQV' | sudo debconf-set-selections
-echo 'slapd slapd/root_password_again password {SSHA}/AWY/9LoQPQ4/rBfU3Wr7NtfZQ3PqNQV' | sudo debconf-set-selections
-echo 'slapd slapd/internal/generated_adminpw password {SSHA}/AWY/9LoQPQ4/rBfU3Wr7NtfZQ3PqNQV' | sudo debconf-set-selections
-echo 'slapd slapd/internal/adminpw password {SSHA}/AWY/9LoQPQ4/rBfU3Wr7NtfZQ3PqNQV' | sudo debconf-set-selections
-echo 'slapd slapd/password1 password {SSHA}/AWY/9LoQPQ4/rBfU3Wr7NtfZQ3PqNQV' | sudo debconf-set-selections
-echo 'slapd slapd/password2 password {SSHA}/AWY/9LoQPQ4/rBfU3Wr7NtfZQ3PqNQV' | sudo debconf-set-selections
-
-sudo sh -c 'echo "slapd slapd/move_old_database boolean true" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/purge_database boolean false" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/no_configuration boolean false" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/dump_database	select	when needed" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/domain string csc.wcupa.edu" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/ppolicy_schema_needs_update	select	abort installation" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/dump_database_destdir	string	/var/backups/slapd-VERSION" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/unsafe_selfwrite_acl	note" | debconf-set-selections'
-sudo sh -c 'echo "slapd shared/organization	string	West Chester University" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/invalid_config	boolean	true" | debconf-set-selections'
-#sudo sh -c 'echo "slapd	slapd/upgrade_slapcat_failure	error" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/backend	select	MDB" | debconf-set-selections'
-sudo sh -c 'echo "slapd slapd/password_mismatch	note" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp" | debconf-set-selections'
-#sudo sh -c 'echo "libssl1.1       libssl1.1/restart-failed        error" | debconf-set-selections'
-#sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-failed        error" | debconf-set-selections'
-#sudo sh -c 'echo "libssl1.0.0     libssl1.0.0/restart-failed      error" | debconf-set-selections'
-#sudo sh -c 'echo "libssl1.0.0:amd64       libssl1.0.0/restart-failed      error" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
-sudo sh -c 'echo "libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2" | debconf-set-selections'
+cat /local/repository/preseedHead.deb | sudo debconf-set-selections
+echo 'debconf end'
 
 sudo apt-get install -y slapd ldap-utils
 sudo dpkg-reconfigure slapd
 sudo ufw allow ldap
 
-
-# Correctly set the LDAP password.
-echo 'running nodeHeadLdapPwd.sh'
-sudo /local/repository/nodeHeadLdapPwd.sh
-echo 'done nodeHeadLdapPwd.sh'
+## Correctly set the LDAP password.
+#echo 'running nodeHeadLdapPwd.sh'
+#sudo /local/repository/nodeHeadLdapPwd.sh
+#echo 'done nodeHeadLdapPwd.sh'
 
 echo 'ldapadd 1'
 ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/basedln.ldif
