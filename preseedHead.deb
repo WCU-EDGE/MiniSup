@@ -1,0 +1,26 @@
+slapd slapd/root_password password rams
+slapd slapd/root_password_again password rams
+slapd slapd/internal/generated_adminpw password rams
+slapd slapd/internal/adminpw password rams
+slapd slapd/password1 password rams
+slapd slapd/password2 password rams
+slapd slapd/move_old_database boolean true
+slapd slapd/purge_database boolean false
+slapd slapd/no_configuration boolean false
+slapd slapd/dump_database	select	when needed
+slapd slapd/domain string csc.wcupa.edu
+slapd slapd/ppolicy_schema_needs_update	select	abort installation
+slapd slapd/dump_database_destdir	string	/var/backups/slapd-VERSION
+slapd slapd/unsafe_selfwrite_acl	note
+slapd shared/organization	string	West Chester University
+slapd slapd/backend	select	MDB
+slapd slapd/password_mismatch	note
+
+libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp
+libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp
+libssl1.1       libssl1.1/restart-failed        error
+libssl1.1:amd64 libssl1.1/restart-failed        error
+libssl1.0.0     libssl1.0.0/restart-failed      error
+libssl1.0.0:amd64       libssl1.0.0/restart-failed      error
+libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2
+libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2
