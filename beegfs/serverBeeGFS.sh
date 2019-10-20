@@ -2,6 +2,8 @@
 
 # https://www.beegfs.io/wiki/ManualInstallWalkThrough
 
+echo 'serverBeeGFS.sh'
+
 ### Name the machine beenode
 
 sudo wget -O /etc/apt/sources.list.d/beegfs-deb9.list https://www.beegfs.io/release/latest-stable/dists/beegfs-deb9.list
