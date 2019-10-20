@@ -2,6 +2,8 @@
 
 ### #!/bin/sh
 
+echo 'nodeHead.sh'
+
 mkdir /software
 #mkdir /scratch
 sudo chown nobody:nogroup /software
