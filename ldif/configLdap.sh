@@ -14,7 +14,8 @@ pam_password    md5
 TLS_CACERT      /etc/ssl/certs/ca-certificates.crt
 EOF
 
-dpkg-reconfigure -f noninteractive slapd
+#dpkg-reconfigure -f noninteractive slapd
+dpkg-reconfigure slapd
 
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/core.ldif
 ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/cosine.ldif 
