@@ -79,6 +79,7 @@ for i in range(0,params.n + 2):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/clientBeeGFS.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/serverBeeGFS.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldif/createUsersLdif.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldif/configLdap.sh"))
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
