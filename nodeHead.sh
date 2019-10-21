@@ -26,7 +26,7 @@ sudo sh -c 'cat /local/repository/preseedHead.deb | debconf-set-selections'
 #cat /local/repository/preseedHead.deb | sudo debconf-set-selections
 echo 'debconf end'
 
-sudo apt-get install -y slapd ldap-utils
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
 sudo dpkg-reconfigure slapd
 sudo ufw allow ldap
 
