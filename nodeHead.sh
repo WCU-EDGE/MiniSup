@@ -22,7 +22,8 @@ sudo apt-get install -y debconf-utils
 # debconf
 echo 'debconf start'
 export DEBIAN_FRONTEND=noninteractive
-cat /local/repository/preseedHead.deb | sudo debconf-set-selections
+sudo sh -c 'cat /local/repository/preseedHead.deb | debconf-set-selections'
+#cat /local/repository/preseedHead.deb | sudo debconf-set-selections
 echo 'debconf end'
 
 sudo apt-get install -y slapd ldap-utils
