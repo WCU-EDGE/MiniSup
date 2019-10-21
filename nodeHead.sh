@@ -30,9 +30,9 @@ sudo dpkg-reconfigure slapd
 sudo ufw allow ldap
 
 ## Correctly set the LDAP password.
-#echo 'running nodeHeadLdapPwd.sh'
-#sudo /local/repository/nodeHeadLdapPwd.sh
-#echo 'done nodeHeadLdapPwd.sh'
+echo 'running nodeHeadLdapPwd.sh'
+sudo /local/repository/nodeHeadLdapPwd.sh
+echo 'done nodeHeadLdapPwd.sh'
 
 sudo /local/repository/ldif/createUsersLdif.sh
 sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -w rams -f /local/repository/ldif/basedln.ldif
