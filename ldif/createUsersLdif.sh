@@ -2,6 +2,8 @@
 
 echo 'createUsersLdif'
 
+PWD_1=$(slappasswd -s rams)
+
 cat <<EOF > /local/repository/users.ldif
 dn: uid=merino,ou=People,dc=csc,dc=wcupa,dc=edu
 objectClass: inetOrgPerson
@@ -14,7 +16,7 @@ cn: merino
 displayName: merino
 uidNumber: 10000
 gidNumber: 5000
-userPassword: "$(slappasswd -s rams)"
+userPassword: $PWD_1
 gecos: Golden Merino
 loginShell: /bin/bash
 homeDirectory: /home/merino
@@ -30,7 +32,7 @@ cn: dorper
 displayName: dorper
 uidNumber: 10001
 gidNumber: 5000
-userPassword: "$(slappasswd -s rams)"
+userPassword: $PWD_1
 gecos: Golden Dorper
 loginShell: /bin/bash
 homeDirectory: /home/dorper
@@ -46,7 +48,7 @@ cn: tester
 displayName: tester
 uidNumber: 10002
 gidNumber: 5000
-userPassword: "$(slappasswd -s rams)"
+userPassword: $PWD_1
 gecos: Golden Tester
 loginShell: /bin/bash
 homeDirectory: /home/tester
