@@ -30,7 +30,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
 
 #sudo /local/repository/ldif/configLdap.sh
 
-sudo dpkg-reconfigure slapd
+sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
 sudo ufw allow ldap
 
 ### Correctly set the LDAP password.
