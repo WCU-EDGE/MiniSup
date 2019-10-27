@@ -19,13 +19,13 @@ sudo sed -i '1 s/^.*$/dn: cn=admin,dc=csc,dc=wcupa,dc=edu/' /tmp/updpasswd.ldif
 sudo sed -i 's/replace: oldRootPW/replace: userPassword/g' /tmp/updpasswd.ldif
 sudo sed -i 's/olcRootPW: {SSHA}/userPassword: {SSHA}/g' /tmp/updpasswd.ldif
 
-ldapmodify -H ldap://192.168.1.1 -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -W -f /tmp/updpasswd.ldif
+#ldapmodify -H ldap://192.168.1.1 -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -W -f /tmp/updpasswd.ldif
 
 echo '#!/usr/bin/expect -f' > /tmp/ldapexpect.sh
 echo 'set timeout -1' >> /tmp/ldapexpect.sh
-echo 'spawn ldapmodify -H ldap:// -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -W -f /tmp/updpasswd.ldif' >> /tmp/ldapexpect.sh
+echo 'spawn ldapmodify -H ldap://192.168.1.1 -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -W -f /tmp/updpasswd.ldif' >> /tmp/ldapexpect.sh
 echo 'expect "Enter LDAP Password: "' >> /tmp/ldapexpect.sh
-echo 'send -- "rams\r"' >> /tmp/ldapexpect.sh
+echo 'send -- "admin\r"' >> /tmp/ldapexpect.sh
 echo 'expect eof' >> /tmp/ldapexpect.sh
 sudo chmod 777 /tmp/ldapexpect.sh
 sudo /tmp/ldapexpect.sh
