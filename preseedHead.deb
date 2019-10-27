@@ -15,6 +15,7 @@ slapd slapd/unsafe_selfwrite_acl  note
 slapd shared/organization string  West Chester University
 slapd slapd/backend select  MDB
 slapd slapd/password_mismatch note
+slapd slapd/invalid_config  boolean true
 
 libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp
 libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp
