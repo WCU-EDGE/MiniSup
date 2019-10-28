@@ -24,4 +24,4 @@ sudo mkdir /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')
 
 # Copy, if exists.
 #cp /local/repository/source/* /scratch/$LOCALHOSTNAME || true
-cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
+sudo cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
