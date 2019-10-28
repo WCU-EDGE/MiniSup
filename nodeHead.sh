@@ -19,6 +19,8 @@ sudo chmod -R a+rx /opt
 sudo apt-get update
 sudo apt-get install -y debconf-utils
 
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
+
 # debconf
 echo 'debconf start'
 export DEBIAN_FRONTEND=noninteractive
@@ -32,11 +34,12 @@ sudo debconf-set-selections <<< 'slapd slapd/password1 password admin'
 sudo debconf-set-selections <<< 'slapd slapd/password2 password admin'
 echo 'debconf end'
 
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
+#sudo DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
 
 #sudo /local/repository/ldif/configLdap.sh
 
-sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
+#sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
+sudo dpkg-reconfigure slapd
 sudo ufw allow ldap
 
 #### Correctly set the LDAP password.
