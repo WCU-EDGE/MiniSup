@@ -20,6 +20,8 @@ sudo sed -i 's/compat systemd/compat systemd ldap/g' /etc/nsswitch.conf
 sudo sed -i 's/use_authtok//g' /etc/pam.d/common-password
 echo 'session optional pam_mkhomedir.so skel=/etc/skel umask=077' | sudo tee -a /etc/pam.d/common-session
 
+sudo ufw allow ldap
+
 sudo apt-get install -y nfs-common
 
 #chkconfig nfs on
