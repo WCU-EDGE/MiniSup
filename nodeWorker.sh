@@ -4,8 +4,10 @@
 
 echo 'nodeWorker.sh'
 
+export DEBIAN_FRONTEND=noninteractive
+
 sudo apt-get update
-sudo apt-get install -y libnss-ldap libpam-ldap ldap-utils
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libnss-ldap libpam-ldap ldap-utils
 
 echo 'debconf start'
 export DEBIAN_FRONTEND=noninteractive
