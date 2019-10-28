@@ -1,23 +1,21 @@
-slapd slapd/root_password password  admin
-slapd slapd/root_password_again password  admin
-slapd slapd/internal/generated_adminpw  password  admin
-slapd slapd/internal/adminpw  password  admin
-slapd slapd/password1 password  admin
-slapd slapd/password2 password  admin
+slapd slapd/root_password password admin
+slapd slapd/root_password_again password admin
+slapd slapd/internal/generated_adminpw password admin
+slapd slapd/internal/adminpw password admin
+slapd slapd/password1 password admin
+slapd slapd/password2 password admin
 slapd slapd/move_old_database boolean true
-slapd slapd/purge_database  boolean false
-slapd slapd/no_configuration  boolean false
-slapd slapd/dump_database select  when needed
-slapd slapd/domain  string  csc.wcupa.edu
-slapd slapd/ppolicy_schema_needs_update select  abort installation
-slapd slapd/dump_database_destdir string  /var/backups/slapd-VERSION
-slapd slapd/unsafe_selfwrite_acl  note
-slapd shared/organization string  West Chester University
-slapd slapd/backend select  MDB
+slapd slapd/purge_database boolean false
+slapd slapd/no_configuration boolean false
+slapd slapd/dump_database select when needed
+slapd slapd/domain string csc.wcupa.edu
+slapd slapd/ppolicy_schema_needs_update select abort installation
+slapd slapd/dump_database_destdir string /var/backups/slapd-VERSION
+slapd slapd/unsafe_selfwrite_acl note
+slapd shared/organization string West Chester University
+slapd slapd/backend select MDB
 slapd slapd/password_mismatch note
-slapd slapd/invalid_config  boolean true
-
-libssl1.0.0     libssl1.0.0/restart-services    string  slapd openvpn ssh ntp
-libssl1.0.0:amd64       libssl1.0.0/restart-services    string  slapd openvpn ssh ntp
-libssl1.1       libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2
-libssl1.1:amd64 libssl1.1/restart-services      string  openvpn ssh ntp bind9 apache2
+libssl1.0.0 libssl1.0.0/restart-services string slapd openvpn ssh ntp
+libssl1.0.0:amd64 libssl1.0.0/restart-services string slapd openvpn ssh ntp
+libssl1.1 libssl1.1/restart-services string openvpn ssh ntp bind9 apache2
+libssl1.1:amd64 libssl1.1/restart-services string openvpn ssh ntp bind9 apache2
