@@ -4,13 +4,15 @@
 
 echo 'nodeWorker.sh'
 
+sudo apt-get update
+sudo apt-get install -y libnss-ldap libpam-ldap ldap-utils
+
 echo 'debconf start'
 export DEBIAN_FRONTEND=noninteractive
 cat /local/repository/preseedWorker.deb | sudo debconf-set-selections
 echo 'debconf end'
 
-sudo apt-get update
-sudo apt-get install -y libnss-ldap libpam-ldap ldap-utils
+sudo dpkg-reconfigure slapd
 
 sudo sed -i 's/compat systemd/compat systemd ldap/g' /etc/nsswitch.conf
 sudo sed -i 's/use_authtok//g' /etc/pam.d/common-password
