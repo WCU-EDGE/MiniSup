@@ -33,10 +33,10 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
 sudo ufw allow ldap
 
-### Correctly set the LDAP password.
-echo 'running nodeHeadLdapPwd.sh'
-sudo /local/repository/nodeHeadLdapPwd.sh
-echo 'done nodeHeadLdapPwd.sh'
+#### Correctly set the LDAP password.
+#echo 'running nodeHeadLdapPwd.sh'
+#sudo /local/repository/nodeHeadLdapPwd.sh
+#echo 'done nodeHeadLdapPwd.sh'
 
 sudo /local/repository/ldif/createUsersLdif.sh
 sudo ldapadd -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -w admin -f /local/repository/ldif/basedln.ldif
