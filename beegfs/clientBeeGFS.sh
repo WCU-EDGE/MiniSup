@@ -13,19 +13,16 @@ sudo cp /local/repository/beegfs/beegfs-deb8.list /etc/apt/sources.list.d/beegfs
 
 sudo wget -q https://www.beegfs.io/release/latest-stable/gpg/DEB-GPG-KEY-beegfs -O- | sudo apt-key add -
 sudo apt-get update -y
-sudo apt-get install -y beegfs-client beegfs-helperd beegfs-utils
+sudo apt-get install -y beegfs-helperd beegfs-utils
+sudo apt-get install -y beegfs-client
 sudo /opt/beegfs/sbin/beegfs-setup-client -m beenode
 
 sudo systemctl start beegfs-helperd
 sudo systemctl start beegfs-client
-
-#sleep 180
-#LOCALHOSTNAME=$(echo $HOSTNAME | awk -F'.' '{print $1}')
-#sudo ln -s /mnt/beegfs /scratch
-#sudo mkdir /scratch/$LOCALHOSTNAME
 
 sudo ln -s /mnt/beegfs /scratch
 sudo mkdir /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')
 
 # Copy the source files from the repository, if they exist.
 sudo cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
+sudo chmod 755 /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')/*
