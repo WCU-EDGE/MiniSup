@@ -1,0 +1,5 @@
+# If you have an active BeeGFS support contract, use the alternative URL below
+# to retrieve early updates. Replace username/password with your account for
+# the BeeGFS customer login area.
+#deb [arch=amd64]  https://username:password@www.beegfs.io/login/release/beegfs_7_1 jessie non-free
+deb [arch=amd64] https://www.beegfs.io/release/beegfs_7_1 jessie non-free
