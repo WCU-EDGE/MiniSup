@@ -31,10 +31,10 @@ sudo apt-get install -y nfs-common
 #service rpcbind start
 #service nfs start
 
-#mkdir /software
 #mkdir /scratch
 sleep 600
 sudo mkdir /opt/shared
+sudo mkdir /software
 sudo mount 192.168.1.1:/home /home
 sudo mount 192.168.1.1:/opt /opt/shared
 sudo mount 192.168.1.1:/software /software
