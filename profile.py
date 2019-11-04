@@ -33,17 +33,21 @@ prefixForIP = "192.168.1."
 #maxSize = 5
 
 beegfnNum = params.n + 1
+slurmNum = params.n + 2
 
 link = request.LAN("lan")
 
 # Make n+3 when the process scheduler is brought into the network.
 # Also update the nfs ip addresses in nodeHead at that time.
 ###for i in range(0,params.n + 1):
-for i in range(0,params.n + 2):
+###for i in range(0,params.n + 2):
+for i in range(0,params.n + 3):
   if i == 0:
     node = request.XenVM("head")
   elif i == beegfnNum:
     node = request.XenVM("beenode")
+  elif i == slurmNum:
+    node = request.XenVM("slurmnode")
   else:
     node = request.XenVM("worker-" + str(i))
   node.cores = 4
@@ -81,6 +85,7 @@ for i in range(0,params.n + 2):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/beegfs-deb8.list"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldif/createUsersLdif.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldif/configLdap.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmHead.sh"))
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
@@ -88,6 +93,8 @@ for i in range(0,params.n + 2):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
   elif i == beegfnNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(params.n)))
+  elif i == slurmNum:
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/slurm/slurmHead.sh " + str(params.n)))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeWorker.sh"))
