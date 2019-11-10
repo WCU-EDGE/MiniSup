@@ -30,8 +30,6 @@ request.addTour(tour)
 
 prefixForIP = "192.168.1."
 
-#maxSize = 5
-
 beegfnNum = params.n + 1
 slurmNum = params.n + 2
 
