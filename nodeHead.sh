@@ -40,7 +40,7 @@ echo 'debconf end'
 
 
 #sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
-sudo dpkg-reconfigure slapd
+sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
 sudo ufw allow ldap
 
 #### Correctly set the LDAP password.
