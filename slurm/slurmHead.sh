@@ -86,9 +86,9 @@ sudo systemctl start slurmctld
 
 #sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
 sudo cp ubuntu-slurm/slurm.conf /etc/slurm/
-sudo sacctmgr add cluster compute-cluster
-sudo sacctmgr add account compute-account description="Compute accounts" Organization=OurOrg
-sudo sacctmgr create user myuser account=compute-account adminlevel=None
+sudo sacctmgr --immediate add cluster compute-cluster
+sudo sacctmgr --immediate add account compute-account description="Compute accounts" Organization=WCUPA
+sudo sacctmgr --immediate create user myuser account=compute-account adminlevel=None
 #sudo sinfo  # test query
 
 # Copy the key for the clients to use
