@@ -60,7 +60,8 @@ sudo systemctl start slurmdbd
 sudo systemctl enable slurmctld
 sudo systemctl start slurmctld
 
-sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
+#sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
+sudo cp ubuntu-slurm/slurm.conf /etc/slurm/
 sudo sacctmgr add cluster compute-cluster
 sudo sacctmgr add account compute-account description="Compute accounts" Organization=OurOrg
 sudo sacctmgr create user myuser account=compute-account adminlevel=None
