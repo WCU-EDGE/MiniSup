@@ -87,7 +87,7 @@ for i in range(0,params.n + 3):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmClient.sh"))
 
   # All nodes run the passwordless script
-  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/docker/passwordless.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum)))
