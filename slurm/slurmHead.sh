@@ -3,6 +3,10 @@ set -x
 
 echo 'slurmHead.sh'
 
+sudo mkdir /var/tmp/slurmpid
+sudo chmod 777 /var/tmp/slurmpid
+sudo chown slurm:slurm /var/tmp/slurmpid
+
 sudo apt-get update -y
 sudo apt-get install -y nfs-common
 sudo mkdir /software
