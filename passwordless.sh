@@ -14,18 +14,9 @@ set -x
 ##
 
 #
-# Get current user
-#
-echo $USER
-
-
-#
-# A simple configuration for the root user.  Change USER, HOMEDIR, and
-# KEYNAME as desired.
+# A simple configuration for the root user.  Change KEYNAME as desired.
 #
 
-USER=root
-HOMEDIR=/root
 KEYNAME=id_rsa
 
 #
@@ -36,7 +27,7 @@ FORCE=1
 #
 # Set some other vars for convenience.
 #
-SSHDIR=$HOMEDIR/.ssh
+SSHDIR=~/.ssh
 PRIVKEY="${SSHDIR}/${KEYNAME}"
 PUBKEY="${SSHDIR}/${KEYNAME}.pub"
 
@@ -48,11 +39,11 @@ if [ $FORCE -eq 0 -a \( -e $PRIVKEY -o -e $PUBKEY \) ]; then
     exit 1
 fi
 
-#
-# Create .ssh dir with appropriate permissions.
-#
-mkdir -p $SSHDIR
-chown -R $USER:$USER $SSHDIR
+##
+## Create .ssh dir with appropriate permissions.
+##
+#mkdir -p $SSHDIR
+#chown -R $USER:$USER $SSHDIR
 
 #
 # Get the per-experiment shared key from the Cloudlab management API.
@@ -88,5 +79,3 @@ mv ${PUBKEY}.tmp $PUBKEY
 touch $SSHDIR/authorized_keys
 cat $PUBKEY >> $SSHDIR/authorized_keys
 chmod 600 $SSHDIR/authorized_keys
-
-exit 0
