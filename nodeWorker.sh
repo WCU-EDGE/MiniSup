@@ -16,8 +16,8 @@ cat /local/repository/preseedWorker.deb | sudo debconf-set-selections
 echo 'debconf end'
 
 #sudo dpkg-reconfigure slapd
-sudo dpkg-reconfigure ldap-auth-config
-sudo dpkg-reconfigure libpam-runtime
+sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure ldap-auth-config
+sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure libpam-runtime
 
 sudo sed -i 's/compat systemd/compat systemd ldap/g' /etc/nsswitch.conf
 sudo sed -i 's/use_authtok//g' /etc/pam.d/common-password
