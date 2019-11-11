@@ -79,7 +79,7 @@ for i in range(0,params.n + 3):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHead.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHeadLdapPwd.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/docker/install_docker.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/install_mpi.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mpi/install_mpi.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/clientBeeGFS.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/serverBeeGFS.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/beegfs-deb8.list"))
@@ -91,7 +91,7 @@ for i in range(0,params.n + 3):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/docker/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/install_mpi.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mpi/install_mpi.sh"))
   elif i == beegfnNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(params.n)))
   elif i == slurmNum:
