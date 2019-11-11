@@ -45,9 +45,9 @@ sudo make contrib
 sudo make install
 cd ..
 sudo fpm -s dir -t deb -v 1.0 -n slurm-17.11.12 --prefix=/usr -C /tmp/slurm-build .
-# <<< ERROR in line below?
+
 sudo dpkg -i slurm-17.11.12_1.0_amd64.deb  
-#sudo useradd slurm   # user already exists
+sudo useradd slurm
 sudo mkdir -p /etc/slurm /etc/slurm/prolog.d /etc/slurm/epilog.d /var/spool/slurm/ctld /var/spool/slurm/d /var/log/slurm
 sudo chown slurm /var/spool/slurm/ctld /var/spool/slurm/d /var/log/slurm
 
