@@ -7,6 +7,13 @@ sudo mkdir /var/tmp/slurmpid
 sudo chmod 777 /var/tmp/slurmpid
 sudo chown slurm:slurm /var/tmp/slurmpid
 
+sudo cp /local/repository/slurm/slurmdbd.conf /etc/slurm/slurmdbd.conf
+sudo chown slurm: /etc/slurm/slurmdbd.conf
+sudo chmod 755 /etc/slurm/slurmdbd.conf
+sudo touch /var/log/slurm/slurmdbd.log
+sudo chown slurm: /var/log/slurm/slurmdbd.log
+sudo chmod 755 /var/log/slurm/slurmdbd.log
+
 sudo apt-get update -y
 sudo apt-get install -y nfs-common
 sudo mkdir /software
