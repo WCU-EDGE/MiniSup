@@ -16,7 +16,8 @@ done
 #sudo apt update -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git gcc make ruby ruby-dev libpam0g-dev libmariadb-client-lgpl-dev libmysqlclient-dev
 sudo gem install fpm
-cd /opt
+#cd /opt
+cd /software
 sudo git clone https://github.com/mknoxnv/ubuntu-slurm.git
 
 HOSTNAMETRIM=$(echo $HOSTNAME | awk -F'.' '{print $1}')
@@ -45,7 +46,8 @@ EOF
 
 sudo mysql -u root < /tmp/setupmaria.sql
 
-cd /opt
+#cd /opt
+cd /software
 sudo wget https://download.schedmd.com/slurm/slurm-17.11.12.tar.bz2
 sudo tar xvjf slurm-17.11.12.tar.bz2
 cd slurm-17.11.12
@@ -61,7 +63,8 @@ sudo useradd slurm
 sudo mkdir -p /etc/slurm /etc/slurm/prolog.d /etc/slurm/epilog.d /var/spool/slurm/ctld /var/spool/slurm/d /var/log/slurm
 sudo chown slurm /var/spool/slurm/ctld /var/spool/slurm/d /var/log/slurm
 
-cd /opt
+#cd /opt
+cd /software
 sudo cp ubuntu-slurm/slurmdbd.service /etc/systemd/system/
 sudo cp ubuntu-slurm/slurmctld.service /etc/systemd/system/
 sudo systemctl daemon-reload
