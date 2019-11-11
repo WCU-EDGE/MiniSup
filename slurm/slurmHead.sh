@@ -3,9 +3,10 @@ set -x
 
 echo 'slurmHead.sh'
 
+sudo useradd slurm
 sudo mkdir /var/tmp/slurmpid
 sudo chmod 777 /var/tmp/slurmpid
-sudo chown slurm:slurm /var/tmp/slurmpid
+sudo chown slurm: /var/tmp/slurmpid
 
 sudo cp /local/repository/slurm/slurmdbd.conf /etc/slurm/slurmdbd.conf
 sudo chown slurm: /etc/slurm/slurmdbd.conf
@@ -70,7 +71,7 @@ cd ..
 sudo fpm -s dir -t deb -v 1.0 -n slurm-17.11.12 --prefix=/usr -C /tmp/slurm-build .
 
 sudo dpkg -i slurm-17.11.12_1.0_amd64.deb  
-sudo useradd slurm
+#sudo useradd slurm
 sudo mkdir -p /etc/slurm /etc/slurm/prolog.d /etc/slurm/epilog.d /var/spool/slurm/ctld /var/spool/slurm/d /var/log/slurm
 sudo chown slurm /var/spool/slurm/ctld /var/spool/slurm/d /var/log/slurm
 
