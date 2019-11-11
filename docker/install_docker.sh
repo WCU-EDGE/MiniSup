@@ -6,7 +6,7 @@ echo 'install_docker.sh'
 # debconf
 echo 'debconf start'
 export DEBIAN_FRONTEND=noninteractive
-cat /local/repository/preseedDocker.deb | sudo debconf-set-selections
+cat /local/repository/docker/preseedDocker.deb | sudo debconf-set-selections
 echo 'debconf end'
 
 sudo apt-get update
