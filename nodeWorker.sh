@@ -44,10 +44,10 @@ sudo apt-get install -y nfs-common
 
 sudo mkdir /opt/shared
 sudo mkdir /software
-sudo mount 192.168.1.1:/home /home
+sudo mount 192.168.1.1:/home /home || true
 # Cycle until we can mount home.
 while [mount | grep home > /dev/null]; do
-  sudo mount 192.168.1.1:/home /home
+  sudo mount 192.168.1.1:/home /home || true
   sleep 60
 done
 sudo mount 192.168.1.1:/opt /opt/shared
