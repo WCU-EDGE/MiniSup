@@ -8,7 +8,7 @@ sudo apt-get install -y nfs-common
 sudo mkdir /software
 sudo mount 192.168.1.1:/software /software || true
 # Cycle until we can mount home.
-while [mount | grep software > /dev/null]; do
+while [ mount | grep software > /dev/null ]; do
   sudo mount 192.168.1.1:/software /software || true
   sleep 60
 done
