@@ -3,6 +3,14 @@ set -x
 
 echo 'slurmHead.sh'
 
+sudo mkdir /software
+sudo mount 192.168.1.1:/software /software || true
+# Cycle until we can mount home.
+while [mount | grep software > /dev/null]; do
+  sudo mount 192.168.1.1:/software /software || true
+  sleep 60
+done
+
 sudo apt update -y
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git gcc make ruby ruby-dev libpam0g-dev libmariadb-client-lgpl-dev libmysqlclient-dev
 sudo gem install fpm
