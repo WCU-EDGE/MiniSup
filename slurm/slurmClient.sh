@@ -6,6 +6,15 @@ sudo apt-get update -y
 sudo apt-get install -y libmunge-dev libmunge2 munge
 
 # Below 
+
+# Wait until the proper files exist.
+while [ ! -d /software/mungedata ]; do
+    sleep 60
+done
+while [ ! -f /software/mungedata/munge.key ]; do
+    sleep 60
+done
+
 sudo cp /software/mungedata/munge.key /etc/munge/
 sudo chown munge:munge /etc/munge/munge.key
 sudo chmod 400 /etc/munge/munge.key
