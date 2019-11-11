@@ -80,3 +80,6 @@ sudo sacctmgr add account compute-account description="Compute accounts" Organiz
 sudo sacctmgr create user myuser account=compute-account adminlevel=None
 #sudo sinfo  # test query
 
+# Copy the key for the clients to use
+sudo mkdir /software/mungedata
+sudo cp /etc/munge/munge.key /software/mungedata/
