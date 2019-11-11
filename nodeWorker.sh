@@ -31,16 +31,27 @@ sudo apt-get install -y nfs-common
 #service rpcbind start
 #service nfs start
 
-#mkdir /scratch
-sleep 600
+##mkdir /scratch
+#sleep 600
+#sudo mkdir /opt/shared
+#sudo mkdir /software
+#sudo mount 192.168.1.1:/home /home
+#sudo mount 192.168.1.1:/opt /opt/shared
+#sudo mount 192.168.1.1:/software /software
+##sudo mount 192.168.1.1:/scratch /scratch
+###mount -t nfs 192.168.1.1:/software /software
+###mount -t nfs 192.168.1.2:/scratch /scratch
+
 sudo mkdir /opt/shared
 sudo mkdir /software
 sudo mount 192.168.1.1:/home /home
+# Cycle until we can mount home.
+while [mount | grep home > /dev/null]; do
+  sudo mount 192.168.1.1:/home /home
+  sleep 60
+done
 sudo mount 192.168.1.1:/opt /opt/shared
 sudo mount 192.168.1.1:/software /software
-#sudo mount 192.168.1.1:/scratch /scratch
-##mount -t nfs 192.168.1.1:/software /software
-##mount -t nfs 192.168.1.2:/scratch /scratch
 
 #while [ ! -d /software/flagdir ]
 #do
