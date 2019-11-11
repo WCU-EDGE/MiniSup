@@ -4,7 +4,7 @@ echo 'createUsersLdif'
 
 PWD_1=$(slappasswd -s rams)
 
-cat <<EOF > /local/repository/ldif/users.ldif
+cat <<EOF > /local/repository/ldap/users.ldif
 dn: uid=merino,ou=People,dc=csc,dc=wcupa,dc=edu
 objectClass: inetOrgPerson
 objectClass: posixAccount
