@@ -64,6 +64,7 @@ for i in range(0,params.n + 3):
   #    node.cores = 4
   #    node.ram = 4096
 
+  
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
   
   iface = node.addInterface("if" + str(i+1))
