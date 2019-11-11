@@ -72,11 +72,9 @@ for i in range(0,params.n + 3):
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
   link.addInterface(iface)
   
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
-
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeWorker.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHead.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
   #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHeadLdapPwd.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/docker/install_docker.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mpi/install_mpi.sh"))
@@ -86,6 +84,9 @@ for i in range(0,params.n + 3):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/createUsersLdif.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/configLdap.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmHead.sh"))
+
+  # All nodes run the passwordless script
+  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/docker/passwordless.sh"))
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n)))
