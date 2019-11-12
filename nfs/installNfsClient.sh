@@ -4,6 +4,8 @@ set -x
 
 echo "installNfsClient.sh"
 
+sudo apt-get update
+
 sudo apt-get install -y nfs-common
 
 #chkconfig nfs on
