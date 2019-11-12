@@ -16,3 +16,8 @@ cat /local/repository/ldap/preseedHead.deb | sudo debconf-set-selections
 # Reconfigure
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
 sudo ufw allow ldap
+
+# Configure ldap
+sudo /local/repository/ldap/createUsersLdif.sh
+sudo ldapadd -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -w admin -f /local/repository/ldap/basedln.ldif
+sudo ldapadd -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -w admin -f /local/repository/ldap/users.ldif
