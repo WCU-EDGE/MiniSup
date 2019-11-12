@@ -4,6 +4,8 @@ set -x
 
 ## Install LDAP head node
 
+echo "headLdap.sh"
+
 # Installation
 sudo apt-get update
 sudo apt-get install -y debconf-utils
