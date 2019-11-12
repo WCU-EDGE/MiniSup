@@ -2,6 +2,8 @@
 
 set -x
 
+echo 'slurmClient.sh'
+
 sudo apt-get update -y
 sudo apt-get install -y libmunge-dev libmunge2 munge
 
@@ -24,7 +26,7 @@ sudo chmod 400 /etc/munge/munge.key
 sudo systemctl enable munge
 sudo systemctl restart munge
 
-sudo dpkg -i /software/slurm-17.02.6_1.0_amd64.deb
+sudo dpkg -i /software/slurm-17.11.12_1.0_amd64.deb
 sudo mkdir /etc/slurm
 
 sudo cp /storage/ubuntu-slurm/slurm.conf /etc/slurm/slurm.conf
