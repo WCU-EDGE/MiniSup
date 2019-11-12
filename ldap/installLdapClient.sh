@@ -2,7 +2,7 @@
 
 set -x
 
-echo "clientLdap.sh"
+echo "installLdapClient.sh"
 
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libnss-ldap libpam-ldap ldap-utils
