@@ -87,6 +87,7 @@ for i in range(0,params.n + 3):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/installLdapHead.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmHead.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmClient.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs/installNfsClient.sh"))
 
   # All nodes run the passwordless script
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
