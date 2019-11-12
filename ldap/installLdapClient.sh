@@ -7,12 +7,9 @@ echo "installLdapClient.sh"
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libnss-ldap libpam-ldap ldap-utils
 
-echo 'debconf start'
 export DEBIAN_FRONTEND=noninteractive
 cat /local/repository/ldap/preseedWorker.deb | sudo debconf-set-selections
-echo 'debconf end'
 
-#sudo dpkg-reconfigure slapd
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure ldap-auth-config
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure libpam-runtime
 
