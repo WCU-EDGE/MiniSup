@@ -17,7 +17,7 @@ sudo chmod -R 777 /home
 sudo chmod -R a+rx /opt
 
 # Install LDAP server
-sudo /local/repository/ldap/ldapHead.sh
+sudo /local/repository/ldap/installLdapHead.sh
 
 sudo apt-get install -y nfs-kernel-server
 #apt-get install -y nfs-utils nfs-utils-lib
