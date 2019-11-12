@@ -9,7 +9,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 sudo apt-get update
 
-sudo /local/repository/ldap/clientLdap.sh
+sudo /local/repository/ldap/installLdapClient.sh
 
 sudo apt-get install -y nfs-common
 
