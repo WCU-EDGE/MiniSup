@@ -4,7 +4,7 @@ set -x
 
 ## Install LDAP head node
 
-echo "headLdap.sh"
+echo "installLdapHead.sh"
 
 # Installation
 sudo apt-get update
