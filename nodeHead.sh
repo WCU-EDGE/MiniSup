@@ -16,48 +16,6 @@ sudo chmod -R a+rx /software
 sudo chmod -R 777 /home
 sudo chmod -R a+rx /opt
 
-sudo apt-get update
-sudo apt-get install -y debconf-utils
-
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
-
-# debconf
-echo 'debconf start'
-export DEBIAN_FRONTEND=noninteractive
-#sudo sh -c 'cat /local/repository/preseedHead.deb | debconf-set-selections'
-cat /local/repository/preseedHead.deb | sudo debconf-set-selections
-#sudo debconf-set-selections <<< 'slapd slapd/root_password password admin'
-#sudo debconf-set-selections <<< 'slapd slapd/root_password_again password admin'
-#sudo debconf-set-selections <<< 'slapd slapd/internal/generated_adminpw password admin'
-#sudo debconf-set-selections <<< 'slapd slapd/internal/adminpw password admin'
-#sudo debconf-set-selections <<< 'slapd slapd/password1 password admin'
-#sudo debconf-set-selections <<< 'slapd slapd/password2 password admin'
-echo 'debconf end'
-
-#sudo DEBIAN_FRONTEND=noninteractive apt-get install -y slapd ldap-utils
-
-#sudo /local/repository/ldap/configLdap.sh
-
-
-#sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
-sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure slapd
-sudo ufw allow ldap
-
-#### Correctly set the LDAP password.
-#echo 'running nodeHeadLdapPwd.sh'
-#sudo /local/repository/nodeHeadLdapPwd.sh
-#echo 'done nodeHeadLdapPwd.sh'
-
-sudo /local/repository/ldap/createUsersLdif.sh
-sudo ldapadd -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -w admin -f /local/repository/ldap/basedln.ldif
-sudo ldapadd -x -D "cn=admin,dc=csc,dc=wcupa,dc=edu" -w admin -f /local/repository/ldap/users.ldif
-
-#sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -w admin -f /local/repository/ldap/basedln.ldif
-#sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -w admin -f /local/repository/ldap/users.ldif
-
-#sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/ldap/basedln.ldif
-#sudo ldapadd -x -D cn=admin,dc=csc,dc=wcupa,dc=edu -W -f /local/repository/users.ldif
-
 sudo apt-get install -y nfs-kernel-server
 #apt-get install -y nfs-utils nfs-utils-lib
 #yum install -y nfs-utils nfs-utils-lib
