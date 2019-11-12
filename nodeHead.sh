@@ -34,9 +34,10 @@ do
 done
 
 # Let the Slurm node have access to the shared directories.
-echo "/home 192.168.1.$2(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
-echo "/opt 192.168.1.$2(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
-echo "/software 192.168.1.$2(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
+slurmip=$(($2 + 1))
+echo "/home 192.168.1.$slurmip(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
+echo "/opt 192.168.1.$slurmip(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
+echo "/software 192.168.1.$slurmip(rw,sync,no_root_squash,no_subtree_check)" | sudo tee -a /etc/exports
 
 sudo systemctl restart nfs-kernel-server
 
