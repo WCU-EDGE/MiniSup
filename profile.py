@@ -83,6 +83,8 @@ for i in range(0,params.n + 3):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/beegfs-deb8.list"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/createUsersLdif.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/configLdap.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/installLdapClient.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/installLdapHead.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmHead.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmClient.sh"))
 
