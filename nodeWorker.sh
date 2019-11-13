@@ -23,4 +23,4 @@ sudo /local/repository/mpi/install_mpi_client.sh
 #  sleep 30
 #done
 
-echo "Done" >> /users/jk880380/clientdone.txt
+echo "Done" >> /users/$USER/clientdone.txt
