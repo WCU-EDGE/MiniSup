@@ -106,4 +106,4 @@ sudo systemctl restart nfs-kernel-server
 #mkdir /software
 #mount -t nfs 192.168.1.1:/software /software
 mkdir /software/flagdir
-echo "Done" >> /users/jk880380/DONEnfsheadandstorage.txt
+echo "Done" >> /users/$USER/DONEnfsheadandstorage.txt
