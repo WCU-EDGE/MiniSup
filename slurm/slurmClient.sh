@@ -29,7 +29,7 @@ sudo systemctl restart munge
 sudo dpkg -i /software/slurm-17.11.12_1.0_amd64.deb
 sudo mkdir /etc/slurm
 
-sudo cp /storage/ubuntu-slurm/slurm.conf /etc/slurm/slurm.conf
+sudo cp /software/ubuntu-slurm/slurm.conf /etc/slurm/slurm.conf
 
 #If necessary modify gres.conf to reflect the properties of this compute node.
 #gres.conf.dgx is an example configuration for the DGX-1.
@@ -38,9 +38,9 @@ sudo cp /storage/ubuntu-slurm/slurm.conf /etc/slurm/slurm.conf
 #The node-config.sh script will, if run on the compute node, output the appropriate lines to
 #add to slurm.conf and gres.conf.
 
-sudo cp /storage/ubuntu-slurm/gres.conf /etc/slurm/gres.conf
-sudo cp /storage/ubuntu-slurm/cgroup.conf /etc/slurm/cgroup.conf
-sudo cp /storage/ubuntu-slurm/cgroup_allowed_devices_file.conf /etc/slurm/cgroup_allowed_devices_file.conf
+sudo cp /software/ubuntu-slurm/gres.conf /etc/slurm/gres.conf
+sudo cp /software/ubuntu-slurm/cgroup.conf /etc/slurm/cgroup.conf
+sudo cp /software/ubuntu-slurm/cgroup_allowed_devices_file.conf /etc/slurm/cgroup_allowed_devices_file.conf
 sudo useradd slurm
 sudo mkdir -p /var/spool/slurm/d
 
