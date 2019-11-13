@@ -45,5 +45,5 @@ sudo useradd slurm
 sudo mkdir -p /var/spool/slurm/d
 
 cp /software/ubuntu-slurm/slurmd.service /etc/systemd/system/
-systemctl enable slurmd
-systemctl start slurmd
+sudo systemctl enable slurmd
+sudo systemctl start slurmd
