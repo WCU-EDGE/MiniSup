@@ -1,6 +1,6 @@
 ldap-auth-config ldap-auth-config/bindpw password admin
 ldap-auth-config ldap-auth-config/rootbindpw password admin
-libpam-runtime libpam-runtime/profiles multiselect unix, ldap, systemd, capability
+libpam-runtime libpam-runtime/profiles multiselect unix,ldap,systemd,capability
 ldap-auth-config ldap-auth-config/ldapns/ldap-server string ldap://192.168.1.1
 ldap-auth-config ldap-auth-config/ldapns/base-dn string dc=csc,dc=wcupa,dc=edu
 ldap-auth-config ldap-auth-config/move-to-debconf boolean true
