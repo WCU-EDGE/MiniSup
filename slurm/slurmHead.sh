@@ -27,7 +27,7 @@ sudo git clone https://github.com/mknoxnv/ubuntu-slurm.git
 
 HOSTNAMETRIM=$(echo $HOSTNAME | awk -F'.' '{print $1}')
 sudo sed -i "s/ControlMachine=slurm-ctrl/ControlMachine=$HOSTNAMETRIM/g" ubuntu-slurm/slurm.conf
-SLURMMACHINELIST=worker[1-$(($1))]
+SLURMMACHINELIST=worker-[1-$(($1))]
 sudo sed -i "s/NodeName=linux1/NodeName=$SLURMMACHINELIST/g" ubuntu-slurm/slurm.conf
 
 sudo apt-get install -y libmunge-dev libmunge2 munge
