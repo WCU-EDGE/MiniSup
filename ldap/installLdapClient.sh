@@ -8,7 +8,7 @@ sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y libnss-ldap libpam-ldap ldap-utils
 
 export DEBIAN_FRONTEND=noninteractive
-cat /local/repository/ldap/preseedWorker.deb | sudo debconf-set-selections
+cat /local/repository/ldap/preseedClient.deb | sudo debconf-set-selections
 
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure ldap-auth-config
 sudo DEBIAN_FRONTEND=noninteractive dpkg-reconfigure libpam-runtime
