@@ -42,6 +42,7 @@ link = request.LAN("lan")
 for i in range(0,params.n + 3):
   if i == 0:
     node = request.XenVM("head")
+    node.routable_control_ip = "true"
   elif i == beegfnNum:
     node = request.XenVM("beenode")
   elif i == slurmNum:
@@ -50,7 +51,7 @@ for i in range(0,params.n + 3):
     node = request.XenVM("worker-" + str(i))
   node.cores = 4
   node.ram = 4096
-  node.routable_control_ip = "true"
+  #node.routable_control_ip = "true"
 
   ##for i in range(6):
   #for i in range(0,params.n + 2):
@@ -88,7 +89,8 @@ for i in range(0,params.n + 3):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmHead.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmClient.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs/installNfsClient.sh"))
-
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs/installNfsHead.sh"))
+  
   # All nodes run the passwordless script
   node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
   
