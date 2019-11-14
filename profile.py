@@ -13,6 +13,9 @@ params = pc.bindParameters()
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
 
+if params.n < 2 or params.n > 5:
+  portal.context.reportError( portal.ParameterError( "You must choose at least 2 and no more than 5 worker nodes." ) )
+
 # Lists for the nodes and such
 nodeList = []
 
