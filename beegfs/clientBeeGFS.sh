@@ -26,3 +26,6 @@ sudo mkdir /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')
 # Copy the source files from the repository, if they exist.
 sudo cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
 sudo chmod 755 /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')/*
+
+# Copy source files, if they exist
+cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
