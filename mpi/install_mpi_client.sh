@@ -9,8 +9,8 @@ echo "install_mpi_client.sh"
 echo 'export PATH=$PATH:/opt/shared/openmpi/3.1.2/bin' | sudo tee -a /etc/skel/.bashrc
 echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/shared/openmpi/3.1.2/lib/' | sudo tee -a /etc/skel/.bashrc
 
-# Guarantee LD_LIBRARY_PATH isn't empty, so we don't have a leading colon in it during a later export (which
-#  would lead to a security hole where Linux first searches the current directory for libraries!)
+# Add openmpi bin and library to path for everyone.
+sudo sed -i '/^PATH/ s/\"$/\:\/opt\/shared\/openmpi\/3.1.2\/bin\"/g' /etc/environment
 echo 'export LD_LIBRARY_PATH=/opt/shared/openmpi/3.1.2/lib/' | sudo tee -a /etc/environment
 
 # Set path right now.
