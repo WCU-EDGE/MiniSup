@@ -14,5 +14,5 @@ sudo sed -i '/^PATH/ s/\"$/\:\/opt\/shared\/openmpi\/3.1.2\/bin\"/g' /etc/enviro
 echo 'export LD_LIBRARY_PATH=/opt/shared/openmpi/3.1.2/lib/' | sudo tee -a /etc/environment
 
 # Set path right now.
-sudo export PATH=$PATH:/opt/shared/openmpi/3.1.2/bin
-sudo export LD_LIBRARY_PATH=/opt/shared/openmpi/3.1.2/lib/
+export PATH=$PATH:/opt/shared/openmpi/3.1.2/bin
+export LD_LIBRARY_PATH=/opt/shared/openmpi/3.1.2/lib/
