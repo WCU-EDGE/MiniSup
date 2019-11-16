@@ -78,7 +78,8 @@ for i in range(0,params.n + 3):
   
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeWorker.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHead.sh"))
-  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless/passwordless.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless/runpasswordless.sh"))
   #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHeadLdapPwd.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/docker/install_docker.sh"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mpi/install_mpi.sh"))
@@ -96,7 +97,7 @@ for i in range(0,params.n + 3):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs/installNfsHead.sh"))
   
   # All nodes run the passwordless script
-  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless.sh"))
+  node.addService(pg.Execute(shell="sh", command="sudo bash /local/repository/passwordless/runpasswordless.sh"))
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum)))
