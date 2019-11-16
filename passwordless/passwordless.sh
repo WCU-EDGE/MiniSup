@@ -31,6 +31,11 @@ SSHDIR=~/.ssh
 PRIVKEY="${SSHDIR}/${KEYNAME}"
 PUBKEY="${SSHDIR}/${KEYNAME}.pub"
 
+# Don't run this more than once.
+if [ -f "${SSHDIR}/passwordlessran.flg" ]
+   exit 0
+fi
+
 #
 # Don't overwrite existing keys unless forced to do so.
 #
@@ -79,3 +84,5 @@ mv ${PUBKEY}.tmp $PUBKEY
 touch $SSHDIR/authorized_keys
 cat $PUBKEY >> $SSHDIR/authorized_keys
 chmod 600 $SSHDIR/authorized_keys
+
+touch "${SSHDIR}/passwordlessran.flg" 
