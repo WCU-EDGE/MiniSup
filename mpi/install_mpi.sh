@@ -32,7 +32,7 @@ export PATH=$PATH:/software/mpiexec/bin
 export LD_LIBRARY_PATH=/software/mpiexec/lib/
 
 # Make sure everyone picks up the paths!
-export USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
+USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
 for i in $USERNAMELIST do
     sudo mkdir /home/$i || true
     sudo chown $i /home/$i
