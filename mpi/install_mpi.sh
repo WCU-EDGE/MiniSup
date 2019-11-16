@@ -31,6 +31,21 @@ echo 'export LD_LIBRARY_PATH=/software/mpiexec/lib/' | sudo tee -a /etc/environm
 export PATH=$PATH:/software/mpiexec/bin
 export LD_LIBRARY_PATH=/software/mpiexec/lib/
 
+# Make sure everyone picks up the paths!
+export USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
+for i in $USERNAMELIST do
+    sudo mkdir /home/$i || true
+    sudo chown $i /home/$i
+    sudo touch /home/$i/.bashrc
+    echo 'export PATH=$PATH:/software/mpiexec/bin' | sudo tee -a /home/$il/.bashrc
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/software/mpiexec/lib/' | sudo tee -a /home/$i/.bashrc
+    sudo mkdir /users/$i || true
+    sudo chown $i /users/$i
+    sudo touch /users/$i/.bashrc
+    echo 'export PATH=$PATH:/software/mpiexec/bin' | sudo tee -a /users/$i/.bashrc
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/software/mpiexec/lib/' | sudo tee -a /users/$i/.bashrc
+done
+
 cd ..
 sudo rm -Rf mpich-3.3.2
 sudo rm -Rf mpich-3.3.2.tar.gz
