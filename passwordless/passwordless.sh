@@ -86,4 +86,10 @@ touch $SSHDIR/authorized_keys
 cat $PUBKEY >> $SSHDIR/authorized_keys
 chmod 600 $SSHDIR/authorized_keys
 
+# Force to add to known_hosts
+for i in $(seq 1 $1)
+do
+  ssh -o StrictHostKeyChecking=no worker-$i ls
+done
+
 touch "${SSHDIR}/passwordlessran.flg" 
