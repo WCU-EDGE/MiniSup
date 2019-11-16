@@ -19,6 +19,15 @@ sudo chmod -R a+rx /software
 
 #################
 
+# Change user home dirs
+USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
+for i in $USERNAMELIST 
+do
+    USER_GROUP=`id -gn ${i}`
+    sudo usermod -m -d /home/$i $i
+    sudo chown $i:$USER_GROUP /home/$i
+done
+
 sudo apt-get install -y nfs-kernel-server
 
 # Create the permissions file for the NFS directory.
