@@ -15,11 +15,11 @@ do
        sudo chown $i:$USER_GROUP /home/$i
        sudo touch /home/$i/.bashrc
        sudo chown $i:$USER_GROUP /home/$i/.bashrc
-       echo '/local/repository/passwordless/passwordless.sh' | sudo tee -a /home/$i/.bashrc
+       echo 'bash /local/repository/passwordless/passwordless.sh' | sudo tee -a /home/$i/.bashrc
        sudo mkdir /users/$i || true
        sudo chown $i:$USER_GROUP /users/$i
        sudo touch /users/$i/.bashrc
        sudo chown $i:$USER_GROUP /users/$i/.bashrc
-       echo '/local/repository/passwordless/passwordless.sh' | sudo tee -a /users/$i/.bashrc
+       echo 'bash /local/repository/passwordless/passwordless.sh' | sudo tee -a /users/$i/.bashrc
     fi
 done
