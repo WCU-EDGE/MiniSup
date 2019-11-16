@@ -33,7 +33,8 @@ export LD_LIBRARY_PATH=/software/mpiexec/lib/
 
 # Make sure everyone picks up the paths!
 USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
-for i in $USERNAMELIST do
+for i in $USERNAMELIST 
+do
     sudo mkdir /home/$i || true
     sudo chown $i /home/$i
     sudo touch /home/$i/.bashrc
