@@ -13,7 +13,7 @@ sudo chown nobody:nogroup /opt
 sudo chown nobody:nogroup /software
 
 sudo chmod -R 777 /home
-sudo chmod -R a+rx /mpishare
+sudo chmod -R 777 /mpishare
 sudo chmod -R a+rx /opt
 sudo chmod -R a+rx /software
 
