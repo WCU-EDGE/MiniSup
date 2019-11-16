@@ -17,10 +17,3 @@ echo "export LD_LIBRARY_PATH='$LD_LIBRARY_PATH:/software/lib/'" >> /users/jk8803
 source ~/.bashrc
 
 sudo /local/repository/mpi/install_mpi_client.sh
-
-#while [ ! -d /scratch/flagdir ]
-#do
-#  sleep 30
-#done
-
-echo "Done" >> /users/$USER/clientdone.txt
