@@ -38,7 +38,7 @@ do
     sudo mkdir /home/$i || true
     sudo chown $i /home/$i
     sudo touch /home/$i/.bashrc
-    echo 'export PATH=$PATH:/software/mpiexec/bin' | sudo tee -a /home/$il/.bashrc
+    echo 'export PATH=$PATH:/software/mpiexec/bin' | sudo tee -a /home/$i/.bashrc
     echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/software/mpiexec/lib/' | sudo tee -a /home/$i/.bashrc
     sudo mkdir /users/$i || true
     sudo chown $i /users/$i
