@@ -10,13 +10,16 @@ for i in $USERNAMELIST
 do
     if [ ! -f /users/$i/.ssh/id_rsa ]
     then
+       USER_GROUP=`id -gn ${i}`
        sudo mkdir /home/$i || true
-       sudo chown $i /home/$i
+       sudo chown $i:$USER_GROUP /home/$i
        sudo touch /home/$i/.bashrc
+       sudo chown $i:$USER_GROUP /home/$i/.bashrc
        echo '/local/repository/passwordless/passwordless.sh' | sudo tee -a /home/$i/.bashrc
        sudo mkdir /users/$i || true
-       sudo chown $i /users/$i
+       sudo chown $i:$USER_GROUP /users/$i
        sudo touch /users/$i/.bashrc
+       sudo chown $i:$USER_GROUP /users/$i/.bashrc
        echo '/local/repository/passwordless/passwordless.sh' | sudo tee -a /users/$i/.bashrc
     fi
 done
