@@ -43,5 +43,6 @@ do
     #   echo "bash /local/repository/passwordless/passwordless.sh $1" | sudo tee -a /users/$i/.bashrc
     #fi
     
+    sudo usermod -a -G root $u
     sudo -H -u $u bash -c "/local/repository/passwordless/passwordless.sh $1"
 done
