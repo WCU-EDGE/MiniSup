@@ -99,5 +99,6 @@ for i in $(seq 1 $1)
 do
   ssh -o StrictHostKeyChecking=no worker-$i ls
 done
+ssh -o StrictHostKeyChecking=no login ls
 
 touch "${SSHDIR}/passwordlessran.flg" 
