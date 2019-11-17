@@ -47,6 +47,14 @@ do
     echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/software/mpiexec/lib/' | sudo tee -a /users/$i/.bashrc
 done
 
+# Create the machine list for MPI workers to use
+MACHINELISTFILE=/mpishare/machinelist
+for m in $(seq 1 $1)
+do
+  echo "worker-${m}" | sudo tee -a $MACHINELISTFILE
+done
+sudo chmod 755 $MACHINELISTFILE 
+
 cd ..
 sudo rm -Rf mpich-3.3.2
 sudo rm -Rf mpich-3.3.2.tar.gz
