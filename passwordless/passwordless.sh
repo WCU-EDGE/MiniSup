@@ -31,11 +31,11 @@ SSHDIR=~/.ssh
 PRIVKEY="${SSHDIR}/${KEYNAME}"
 PUBKEY="${SSHDIR}/${KEYNAME}.pub"
 
-## Don't run this more than once.
-#if [ -f "${SSHDIR}/passwordlessran.flg" ]
-#then
-#   exit 0
-#fi
+# Don't run this more than once.
+if [ -f "${SSHDIR}/passwordlessran.flg" ]
+then
+   exit 0
+fi
 
 #
 # Don't overwrite existing keys unless forced to do so.
