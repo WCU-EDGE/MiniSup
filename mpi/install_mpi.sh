@@ -49,7 +49,7 @@ done
 
 # Create the machine list for MPI workers to use
 MACHINELISTFILE=/mpishare/machinelist
-echo "head" | sudo tee -a $MACHINELISTFILE
+echo "login" | sudo tee -a $MACHINELISTFILE
 for m in $(seq 1 $1)
 do
   echo "worker-${m}" | sudo tee -a $MACHINELISTFILE
