@@ -51,14 +51,22 @@ fi
 #mkdir -p $SSHDIR
 #chown -R $USER:$USER $SSHDIR
 
-#
-# Get the per-experiment shared key from the Cloudlab management API.
-#
-geni-get key > ${PRIVKEY}.tmp
-if [ ! $? -eq 0 -o ! -s ${PRIVKEY}.tmp ]; then
-    echo "ERROR: failed to retrieve per-experiment key!"
-    exit 1
-fi
+##
+## Get the per-experiment shared key from the Cloudlab management API.
+##
+#geni-get key > ${PRIVKEY}.tmp
+#if [ ! $? -eq 0 -o ! -s ${PRIVKEY}.tmp ]; then
+#    echo "ERROR: failed to retrieve per-experiment key!"
+#    exit 1
+#fi
+
+# Get the per-experiment key saved by addpasswordless.sh
+SAVEDKEYDIR=/software/geni-key
+PRIVKEYNAME=geni-key.key
+SAVEDPRIVKEY="${SAVEDKEYDIR}/${PRIVKEYNAME}"
+sudo cp $SAVEDPRIVKEY ${PRIVKEY}.tmp
+USER_GROUP=`id -gn ${USER}`
+sudo chown $USER:$USER_GROUP ${PRIVKEY}.tmp
 
 #
 # Ensure correct, minimal permissions for ssh.
