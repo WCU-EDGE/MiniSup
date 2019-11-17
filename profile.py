@@ -99,7 +99,7 @@ for i in range(0,params.n + 3):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/docker/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mpi/install_mpi.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mpi/install_mpi.sh " + str(params.n)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
   elif i == beegfnNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(params.n)))
