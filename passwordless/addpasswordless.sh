@@ -1,8 +1,10 @@
 #!/bin/bash
 
-set -x
-
 echo "addpasswordless.sh"
+
+USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
+
+set -x
 
 # Get the per-experiment key, which cannot be accessed by the LDAP users.
 while [ ! -d /software/flagdir ]; do
@@ -23,9 +25,6 @@ if [ ! -d $SSHDIR ]; then
 fi
 
 # The passwordless script must run for every user so put it in .bashrc.
-set +x
-USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
-set -x
 for u in $USERNAMELIST 
 do
     #if [ ! -f /users/$i/.ssh/id_rsa ]
