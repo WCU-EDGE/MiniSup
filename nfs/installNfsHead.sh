@@ -20,7 +20,9 @@ sudo chmod -R a+rx /software
 #################
 
 # Change user home dirs
+set +x
 USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
+set -x
 for i in $USERNAMELIST 
 do
     USER_GROUP=`id -gn ${i}`
