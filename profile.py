@@ -66,25 +66,6 @@ for i in range(0,params.n + 3):
   # Set scripts in the repository executable and readable.
   node.addService(pg.Execute(shell="sh", command="sudo find /local/repository/ -type f -iname \"*.sh\" -exec chmod 755 {} \;"))
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/beegfs-deb8.list")) 
-
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeWorker.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nodeHead.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless/passwordless.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/passwordless/addpasswordless.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/docker/install_docker.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mpi/install_mpi.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/mpi/install_mpi_client.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/clientBeeGFS.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/serverBeeGFS.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/beegfs-deb8.list"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/createUsersLdif.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/configLdap.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/installLdapClient.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/ldap/installLdapHead.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmHead.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/slurm/slurmClient.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs/installNfsClient.sh"))
-  #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs/installNfsHead.sh"))
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum)))
