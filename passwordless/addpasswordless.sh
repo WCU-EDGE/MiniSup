@@ -23,7 +23,9 @@ if [ ! -d $SSHDIR ]; then
 fi
 
 # The passwordless script must run for every user so put it in .bashrc.
+set +x
 USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
+set -x
 for u in $USERNAMELIST 
 do
     #if [ ! -f /users/$i/.ssh/id_rsa ]
