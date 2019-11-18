@@ -29,7 +29,9 @@ echo '192.168.1.1:/opt /opt/shared nfs' | sudo tee -a /etc/fstab
 echo '192.168.1.1:/software /software nfs' | sudo tee -a /etc/fstab
 
 # Change user home dirs
+set +x
 USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
+set -x
 for i in $USERNAMELIST 
 do
     sudo usermod -d /home/$i $i
