@@ -45,12 +45,12 @@ link = request.LAN("lan")
 for i in range(0,params.n + 3):
   if i == 0:
     node = request.XenVM("head")
-    #node.routable_control_ip = "true"
+    node.routable_control_ip = "true"
   elif i == beegfnNum:
     node = request.XenVM("beenode")
   elif i == slurmNum:
     node = request.XenVM("loginnode")
-    node.routable_control_ip = "true"  
+    #node.routable_control_ip = "true"  
   else:
     node = request.XenVM("worker-" + str(i))
   node.cores = 4
