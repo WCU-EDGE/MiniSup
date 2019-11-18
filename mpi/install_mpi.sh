@@ -1,7 +1,10 @@
 #!/bin/bash
-set -x
 
 echo 'install_mpi.sh'
+
+USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
+
+set -x
 
 wget http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz
 tar -xzf mpich-3.3.2.tar.gz
@@ -32,9 +35,6 @@ export PATH=$PATH:/software/mpiexec/bin
 export LD_LIBRARY_PATH=/software/mpiexec/lib/
 
 # Make sure everyone picks up the paths!
-set +x
-USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
-set -x
 for i in $USERNAMELIST 
 do
     sudo mkdir /home/$i || true
