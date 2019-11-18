@@ -35,28 +35,28 @@ prefixForIP = "192.168.1."
 
 beegfnNum = params.n + 1
 slurmNum = params.n + 2
-loginNum = params.n + 3
+#loginNum = params.n + 3
 
 link = request.LAN("lan")
 
 ###for i in range(0,params.n + 1):
 ###for i in range(0,params.n + 2):
-###for i in range(0,params.n + 3):
-for i in range(0,params.n + 4):
+###for i in range(0,params.n + 4):
+for i in range(0,params.n + 3):
   if i == 0:
     node = request.XenVM("head")
+    node.routable_control_ip = "true"    
   elif i == beegfnNum:
     node = request.XenVM("beenode")
   elif i == slurmNum:
     node = request.XenVM("slurmnode")
-  elif i == loginNum:
-    node = request.XenVM("login")
-    node.routable_control_ip = "true"    
+#  elif i == loginNum:
+#    node = request.XenVM("login")
+#    node.routable_control_ip = "true"    
   else:
     node = request.XenVM("worker-" + str(i))
   node.cores = 4
   node.ram = 4096
-  #node.routable_control_ip = "true"
 
   ##for i in range(6):
   #for i in range(0,params.n + 2):
@@ -103,7 +103,8 @@ for i in range(0,params.n + 4):
   #node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/nfs/installNfsHead.sh"))
   
   if i == 0:
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum) + " " + str(loginNum)))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum)))
+    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum) + " " + str(loginNum)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/docker/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mpi/install_mpi.sh " + str(params.n)))
