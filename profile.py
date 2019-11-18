@@ -45,39 +45,23 @@ link = request.LAN("lan")
 for i in range(0,params.n + 3):
   if i == 0:
     node = request.XenVM("head")
-    node.routable_control_ip = "true"    
+    #node.routable_control_ip = "true"
   elif i == beegfnNum:
     node = request.XenVM("beenode")
   elif i == slurmNum:
-    node = request.XenVM("slurmnode")
-#  elif i == loginNum:
-#    node = request.XenVM("login")
-#    node.routable_control_ip = "true"    
+    node = request.XenVM("loginnode")
+    node.routable_control_ip = "true"  
   else:
     node = request.XenVM("worker-" + str(i))
   node.cores = 4
   node.ram = 4096
-
-  ##for i in range(6):
-  #for i in range(0,params.n + 2):
-  #  if i == 0:
-  #    node = request.XenVM("head")
-  #    node.routable_control_ip = "true"
-  #  elif i == 1:
-  #    node = request.XenVM("storage")
-  #  else:
-  #    node = request.XenVM("compute-" + str(i-1))
-  #    node.cores = 4
-  #    node.ram = 4096
-
   
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
   
   iface = node.addInterface("if" + str(i+1))
   iface.component_id = "eth"+ str(i+1)
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
-  link.addInterface(iface)
-  
+  link.addInterface(iface)  
   
   # Set scripts in the repository executable and readable.
   node.addService(pg.Execute(shell="sh", command="sudo find /local/repository/ -type f -iname \"*.sh\" -exec chmod 755 {} \;"))
