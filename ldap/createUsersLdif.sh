@@ -3,6 +3,7 @@
 echo 'createUsersLdif'
 
 PWD_1=$(slappasswd -s rams)
+PWD_2=$(slappasswd -s goldenram)
 
 cat <<EOF > /local/repository/ldap/users.ldif
 dn: uid=merino,ou=People,dc=csc,dc=wcupa,dc=edu
@@ -52,4 +53,20 @@ userPassword: $PWD_1
 gecos: Golden Tester
 loginShell: /bin/bash
 homeDirectory: /home/tester
+
+dn: uid=slurm,ou=People,dc=csc,dc=wcupa,dc=edu
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: slurm
+sn: Slurm
+givenName: SlurmUser
+cn: slurm
+displayName: slurm
+uidNumber: 10003
+gidNumber: 5000
+userPassword: $PWD_2
+gecos: Slurm User
+loginShell: /bin/bash
+homeDirectory: /home/slurm
 EOF
