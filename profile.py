@@ -53,7 +53,7 @@ for i in range(0,params.n + 3):
   elif i == slurmNum:
     #node = request.XenVM("loginnode")
     node = request.XenVM("head")
-    node.routable_control_ip = "true"  
+    #node.routable_control_ip = "true"  
   else:
     node = request.XenVM("worker-" + str(i))
   node.cores = 4
@@ -64,6 +64,10 @@ for i in range(0,params.n + 3):
   iface = node.addInterface("if" + str(i+1))
   iface.component_id = "eth"+ str(i+1)
   iface.addAddress(pg.IPv4Address(prefixForIP + str(i + 1), "255.255.255.0"))
+  
+  if i == slurmNum:
+    node.routable_control_ip = "true" 
+  
   link.addInterface(iface)  
   
   # Set scripts in the repository executable and readable.
