@@ -9,7 +9,7 @@ set -x
 wget http://www.mpich.org/static/downloads/3.3.2/mpich-3.3.2.tar.gz
 tar -xzf mpich-3.3.2.tar.gz
 cd mpich-3.3.2
-./configure --disable-fortran --prefix=/software/mpi --exec-prefix=/software/mpiexec --with-slurm=/usr --with-pmi=pmi2
+./configure --disable-fortran --prefix=/software/mpi --exec-prefix=/software/mpiexec --with-slurm=/software/slurm --with-pmi=pmi2
 
 #./configure --disable-fortran --prefix=/software/mpi --exec-prefix=/software/mpiexec
 
