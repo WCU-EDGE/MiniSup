@@ -62,7 +62,7 @@ sudo make
 sudo make contrib
 sudo make install
 cd ..
-sudo fpm -s dir -t deb -v 1.0 -n slurm-17.11.12 --prefix=/usr -C /tmp/slurm-build .
+sudo fpm -s dir -t deb -v 1.0 -n slurm-17.11.12 --prefix=/usr -C /software/slurm .
 
 sudo dpkg -i slurm-17.11.12_1.0_amd64.deb  
 sudo useradd slurm
