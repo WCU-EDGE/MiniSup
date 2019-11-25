@@ -3,7 +3,7 @@ set -x
 
 echo 'slurmHead.sh'
 
-sudo useradd slurm
+#sudo useradd slurm
 sudo mkdir /var/tmp/slurmpid
 sudo chmod 777 /var/tmp/slurmpid
 sudo chown slurm: /var/tmp/slurmpid
