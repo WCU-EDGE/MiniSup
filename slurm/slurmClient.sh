@@ -44,6 +44,6 @@ sudo cp /software/ubuntu-slurm/cgroup_allowed_devices_file.conf /etc/slurm/cgrou
 sudo useradd slurm
 sudo mkdir -p /var/spool/slurm/d
 
-cp /software/ubuntu-slurm/slurmd.service /etc/systemd/system/
+sudo cp /software/ubuntu-slurm/slurmd.service /etc/systemd/system/
 sudo systemctl enable slurmd
 sudo systemctl start slurmd
