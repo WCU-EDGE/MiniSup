@@ -91,8 +91,6 @@ sudo systemctl start slurmdbd
 sudo systemctl enable slurmctld
 sudo systemctl start slurmctld
 
-# For the worker machines to use
-sudo cp /local/repository/slurm/slurm.conf /mpishare/
 
 ##sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
 #sudo cp ubuntu-slurm/slurm.conf /etc/slurm/
@@ -110,3 +108,4 @@ sudo sacctmgr --immediate create user myuser account=compute-account adminlevel=
 # Copy the key for the clients to use
 sudo mkdir /software/mungedata
 sudo cp /etc/munge/munge.key /software/mungedata/
+sudo cp /local/repository/slurm/slurm.conf /software/mungedata/
