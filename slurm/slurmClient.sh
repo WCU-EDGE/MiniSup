@@ -29,7 +29,25 @@ sudo systemctl restart munge
 sudo dpkg -i /software/slurm-17.11.12_1.0_amd64.deb
 sudo mkdir /etc/slurm
 
-sudo cp /software/ubuntu-slurm/slurm.conf /etc/slurm/slurm.conf
+sudo cp /local/repository/slurm/slurm.conf /etc/slurm/
+sudo cp /local/repository/slurm/gres.conf /etc/slurm/
+sudo cp /local/repository/slurm/cgroup.conf /etc/slurm/
+sudo cp /local/repository/slurm/cgroup_allowed_devices_file.conf /etc/slurm/
+sudo cp /local/repository/slurm/slurmd.service /etc/systemd/system/
+
+sudo chown root:root /etc/slurm/slurm.conf
+sudo chown root:root /etc/slurm/gres.conf
+sudo chown root:root /etc/slurm/cgroup.conf
+sudo chown root:root /etc/slurm/cgroup_allowed_devices_file.conf
+sudo chown root:root /etc/slurm/slurmd.service
+
+sudo chmod 644 /etc/slurm/slurm.conf
+sudo chmod 644 /etc/slurm/gres.conf
+sudo chmod 644 /etc/slurm/cgroup.conf
+sudo chmod 644 /etc/slurm/cgroup_allowed_devices_file.conf
+sudo chmod 644 /etc/slurm/slurmd.service
+
+#sudo cp /software/ubuntu-slurm/slurm.conf /etc/slurm/slurm.conf
 
 #If necessary modify gres.conf to reflect the properties of this compute node.
 #gres.conf.dgx is an example configuration for the DGX-1.
@@ -38,12 +56,14 @@ sudo cp /software/ubuntu-slurm/slurm.conf /etc/slurm/slurm.conf
 #The node-config.sh script will, if run on the compute node, output the appropriate lines to
 #add to slurm.conf and gres.conf.
 
-sudo cp /software/ubuntu-slurm/gres.conf /etc/slurm/gres.conf
-sudo cp /software/ubuntu-slurm/cgroup.conf /etc/slurm/cgroup.conf
-sudo cp /software/ubuntu-slurm/cgroup_allowed_devices_file.conf /etc/slurm/cgroup_allowed_devices_file.conf
-sudo useradd slurm
+#sudo cp /software/ubuntu-slurm/gres.conf /etc/slurm/gres.conf
+#sudo cp /software/ubuntu-slurm/cgroup.conf /etc/slurm/cgroup.conf
+#sudo cp /software/ubuntu-slurm/cgroup_allowed_devices_file.conf /etc/slurm/cgroup_allowed_devices_file.conf
+#sudo useradd slurm
+
 sudo mkdir -p /var/spool/slurm/d
 
-sudo cp /software/ubuntu-slurm/slurmd.service /etc/systemd/system/
+#sudo cp /software/ubuntu-slurm/slurmd.service /etc/systemd/system/
+
 sudo systemctl enable slurmd
 sudo systemctl start slurmd
