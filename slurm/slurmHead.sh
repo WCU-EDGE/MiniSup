@@ -3,32 +3,22 @@ set -x
 
 echo 'slurmHead.sh'
 
-#sudo useradd slurm
-#sudo mkdir /var/tmp/slurmpid
-#sudo chmod 777 /var/tmp/slurmpid
-#sudo chown slurm: /var/tmp/slurmpid
-
 sudo apt-get update -y
-#sudo apt-get install -y nfs-common
-#sudo mkdir /software
-#sudo mount 192.168.1.1:/software /software || true
-## Cycle until we can mount home.
-#while [ mount | grep software > /dev/null ]; do
-#  sudo mount 192.168.1.1:/software /software || true
-#  sleep 60
-#done
 
-#sudo apt update -y
+#HOSTNAMETRIM=$(echo $HOSTNAME | awk -F'.' '{print $1}')
+#sudo sed -i "s/ControlMachine=slurm-ctrl/ControlMachine=$HOSTNAMETRIM/g" ubuntu-slurm/slurm.conf
+SLURMMACHINELIST=worker-[1-$(($1))]
+sudo sed -i "s/NodeName=linux1/NodeName=$SLURMMACHINELIST/g" /local/repository/slurm/slurm.conf
+
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git gcc make ruby ruby-dev libpam0g-dev libmariadb-client-lgpl-dev libmysqlclient-dev
 sudo gem install fpm
-#cd /opt
 cd /software
-sudo git clone https://github.com/mknoxnv/ubuntu-slurm.git
 
-HOSTNAMETRIM=$(echo $HOSTNAME | awk -F'.' '{print $1}')
-sudo sed -i "s/ControlMachine=slurm-ctrl/ControlMachine=$HOSTNAMETRIM/g" ubuntu-slurm/slurm.conf
-SLURMMACHINELIST=worker-[1-$(($1))]
-sudo sed -i "s/NodeName=linux1/NodeName=$SLURMMACHINELIST/g" ubuntu-slurm/slurm.conf
+#sudo git clone https://github.com/mknoxnv/ubuntu-slurm.git
+#HOSTNAMETRIM=$(echo $HOSTNAME | awk -F'.' '{print $1}')
+#sudo sed -i "s/ControlMachine=slurm-ctrl/ControlMachine=$HOSTNAMETRIM/g" ubuntu-slurm/slurm.conf
+#SLURMMACHINELIST=worker-[1-$(($1))]
+#sudo sed -i "s/NodeName=linux1/NodeName=$SLURMMACHINELIST/g" ubuntu-slurm/slurm.conf
 
 sudo apt-get install -y libmunge-dev libmunge2 munge
 sudo systemctl enable munge
@@ -77,7 +67,11 @@ sudo touch /var/log/slurm/slurmdbd.log
 sudo chown slurm: /var/log/slurm/slurmdbd.log
 sudo chmod 755 /var/log/slurm/slurmdbd.log
 
-#cd /opt
+# For the head node to use
+sudo cp /local/repository/slurm/slurm.conf /etc/slurm/
+sudo chown root:root /etc/slurm/slurm.conf
+sudo chmod 644 /etc/slurm/slurm.conf
+
 cd /software
 sudo cp /local/repository/slurm/slurmdbd.service /etc/systemd/system/
 sudo cp /local/repository/slurm/slurmctld.service /etc/systemd/system/
@@ -94,11 +88,6 @@ sudo systemctl start slurmctld
 
 ##sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
 #sudo cp ubuntu-slurm/slurm.conf /etc/slurm/
-
-# For the head node to use
-sudo cp /local/repository/slurm/slurm.conf /etc/slurm/
-sudo chown root:root /etc/slurm/slurm.conf
-sudo chmod 644 /etc/slurm/slurm.conf
 
 sudo sacctmgr --immediate add cluster compute-cluster
 sudo sacctmgr --immediate add account compute-account description="Compute accounts" Organization=WCUPA
