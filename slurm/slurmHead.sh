@@ -4,9 +4,9 @@ set -x
 echo 'slurmHead.sh'
 
 #sudo useradd slurm
-sudo mkdir /var/tmp/slurmpid
-sudo chmod 777 /var/tmp/slurmpid
-sudo chown slurm: /var/tmp/slurmpid
+#sudo mkdir /var/tmp/slurmpid
+#sudo chmod 777 /var/tmp/slurmpid
+#sudo chown slurm: /var/tmp/slurmpid
 
 sudo apt-get update -y
 #sudo apt-get install -y nfs-common
