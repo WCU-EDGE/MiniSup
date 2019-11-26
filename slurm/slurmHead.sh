@@ -85,7 +85,6 @@ sudo systemctl start slurmdbd
 sudo systemctl enable slurmctld
 sudo systemctl start slurmctld
 
-
 ##sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
 #sudo cp ubuntu-slurm/slurm.conf /etc/slurm/
 
