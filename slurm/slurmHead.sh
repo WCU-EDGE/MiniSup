@@ -79,16 +79,29 @@ sudo chmod 755 /var/log/slurm/slurmdbd.log
 
 #cd /opt
 cd /software
-sudo cp ubuntu-slurm/slurmdbd.service /etc/systemd/system/
-sudo cp ubuntu-slurm/slurmctld.service /etc/systemd/system/
+sudo cp /local/repository/slurm/slurmdbd.service /etc/systemd/system/
+sudo cp /local/repository/slurm/slurmctld.service /etc/systemd/system/
+sudo chown root:root /etc/systemd/system/slurmdbd.service
+sudo chown root:root /etc/systemd/system/slurmctld.service
+sudo chmod 644 /etc/systemd/system/slurmdbd.service
+sudo chmod 644 /etc/systemd/system/slurmctld.service
 sudo systemctl daemon-reload
 sudo systemctl enable slurmdbd
 sudo systemctl start slurmdbd
 sudo systemctl enable slurmctld
 sudo systemctl start slurmctld
 
-#sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
-sudo cp ubuntu-slurm/slurm.conf /etc/slurm/
+# For the worker machines to use
+sudo cp /local/repository/slurm/slurm.conf /mpishare/
+
+##sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
+#sudo cp ubuntu-slurm/slurm.conf /etc/slurm/
+
+# For the head node to use
+sudo cp /local/repository/slurm/slurm.conf /etc/slurm/
+sudo chown root:root /etc/slurm/slurm.conf
+sudo chmod 644 /etc/slurm/slurm.conf
+
 sudo sacctmgr --immediate add cluster compute-cluster
 sudo sacctmgr --immediate add account compute-account description="Compute accounts" Organization=WCUPA
 sudo sacctmgr --immediate create user myuser account=compute-account adminlevel=None
