@@ -14,7 +14,8 @@ sudo cp /software/slurm/include/slurm/pmi.h /software/slurm/include/
 sudo wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.2.tar.gz
 gunzip -c openmpi-4.0.2.tar.gz | tar xf -
 cd openmpi-4.0.2
-sudo ./configure --prefix=/software/openmpi --with-slurm --with-pmix
+sudo ./configure --prefix=/software/openmpi --with-slurm --with-pmi=/usr -q
+#sudo ./configure --prefix=/software/openmpi --with-slurm --with-pmix
 #sudo ./configure --prefix=/software/openmpi --with-slurm --with-pmi=/software/slurm -q
 #sudo ./configure --prefix=/software/openmpi --with-slurm 
 #sudo ./configure --prefix=/software/openmpi --with-slurm --with-pmi=/software/slurm/include/slurm --with-pmi-libdir=/software/slurm/lib
