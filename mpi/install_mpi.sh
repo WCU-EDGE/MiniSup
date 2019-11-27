@@ -7,7 +7,8 @@ USERNAMELIST=$(getent passwd {1000..60000} | sed 's/:.*//')
 set -x
 
 # Get the pmi file into the correct location, or MPI is unable to find it.
-sudo ln -s /software/slurm/include/slurm/pmi.h /software/slurm/include/pmi.h
+sudo cp /software/slurm/include/slurm/pmi.h /software/slurm/include/
+#sudo ln -s /software/slurm/include/slurm/pmi.h /software/slurm/include/pmi.h
 
 # Install MPI itself
 sudo wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.2.tar.gz
