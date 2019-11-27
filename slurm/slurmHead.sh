@@ -97,3 +97,7 @@ sudo sacctmgr --immediate create user myuser account=compute-account adminlevel=
 sudo mkdir /software/mungedata
 sudo cp /etc/munge/munge.key /software/mungedata/
 sudo cp /local/repository/slurm/slurm.conf /software/mungedata/
+
+cd ..
+sudo rm -Rf slurm-17.11.12
+sudo rm -Rf slurm-17.11.12.tar.bz2
