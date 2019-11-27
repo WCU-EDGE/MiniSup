@@ -98,6 +98,6 @@ sudo mkdir /software/mungedata
 sudo cp /etc/munge/munge.key /software/mungedata/
 sudo cp /local/repository/slurm/slurm.conf /software/mungedata/
 
-cd ..
+cd /software
 sudo rm -Rf slurm-17.11.12
 sudo rm -Rf slurm-17.11.12.tar.bz2
