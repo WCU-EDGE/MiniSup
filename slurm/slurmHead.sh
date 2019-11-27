@@ -85,9 +85,6 @@ sudo systemctl start slurmdbd
 sudo systemctl enable slurmctld
 sudo systemctl start slurmctld
 
-##sudo cp ubuntu-slurm/slurm.conf /etc/slurm-llnl/
-#sudo cp ubuntu-slurm/slurm.conf /etc/slurm/
-
 sudo sacctmgr --immediate add cluster compute-cluster
 sudo sacctmgr --immediate add account compute-account description="Compute accounts" Organization=WCUPA
 sudo sacctmgr --immediate create user myuser account=compute-account adminlevel=None
@@ -98,6 +95,13 @@ sudo mkdir /software/mungedata
 sudo cp /etc/munge/munge.key /software/mungedata/
 sudo cp /local/repository/slurm/slurm.conf /software/mungedata/
 
+# Remove installation-only files
 cd /software
 sudo rm -Rf slurm-17.11.12
 sudo rm -Rf slurm-17.11.12.tar.bz2
+
+# Restart the workers
+for node_i in $(seq 1 $1)
+do
+   sudo scontrol update State=Resume NodeName=worker-$node_i
+done
