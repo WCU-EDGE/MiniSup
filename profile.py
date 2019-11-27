@@ -21,7 +21,7 @@ nodeList = []
 
 tourDescription = \
 """
-This profile provides the template for a compute node with Docker installed on Ubuntu 18.04
+This profile provides a Slurm and Open MPI cluster installed on Ubuntu 18.04.
 """
 
 #
@@ -35,22 +35,16 @@ prefixForIP = "192.168.1."
 
 beegfnNum = params.n + 1
 slurmNum = params.n + 2
-#loginNum = params.n + 3
 
 link = request.LAN("lan")
 
 for i in range(0,params.n + 3):
   if i == 0:
-    #node = request.XenVM("head")
     node = request.XenVM("nfs")
-    #node.routable_control_ip = "true"
   elif i == beegfnNum:
-    #node = request.XenVM("beenode")
     node = request.XenVM("pfs")
   elif i == slurmNum:
-    #node = request.XenVM("loginnode")
     node = request.XenVM("head")
-    #node.routable_control_ip = "true"  
   else:
     node = request.XenVM("worker-" + str(i))
   node.cores = 4
@@ -73,10 +67,8 @@ for i in range(0,params.n + 3):
   
   if i == 0:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum)))
-    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeHead.sh " + str(params.n) + " " + str(slurmNum) + " " + str(loginNum)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/docker/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
-    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mpi/install_mpi.sh " + str(params.n)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
   elif i == beegfnNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(params.n)))
@@ -96,5 +88,3 @@ for i in range(0,params.n + 3):
   
 # Print the RSpec to the enclosing page.
 pc.printRequestRSpec(request)
-
-
