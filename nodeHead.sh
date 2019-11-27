@@ -11,6 +11,5 @@ sudo /local/repository/ldap/installLdapClient.sh
 
 # Install NFS server
 sudo /local/repository/nfs/installNfsHead.sh $1 $2
-#sudo /local/repository/nfs/installNfsHead.sh $1 $2 $3
 
 mkdir /software/flagdir
