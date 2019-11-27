@@ -94,7 +94,7 @@ for i in range(0,params.n + 3):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/docker/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeWorker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/slurm/slurmClient.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/slurm/slurmClient.sh " + str(params.n)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
   
 # Print the RSpec to the enclosing page.
