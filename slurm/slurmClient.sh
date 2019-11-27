@@ -29,6 +29,9 @@ sudo systemctl restart munge
 sudo dpkg -i /software/slurm-17.11.12_1.0_amd64.deb
 sudo mkdir /etc/slurm
 
+SLURMMACHINELIST=worker-[1-$(($1))]
+sudo sed -i "s/NodeName=linux1/NodeName=$SLURMMACHINELIST/g" /local/repository/slurm/slurm.conf
+
 sudo cp /local/repository/slurm/slurm.conf /etc/slurm/
 sudo cp /local/repository/slurm/gres.conf /etc/slurm/
 sudo cp /local/repository/slurm/cgroup.conf /etc/slurm/
