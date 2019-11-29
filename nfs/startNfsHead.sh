@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-echo 'nodeHead.sh'
+echo 'startNfsHead.sh'
 
 # Install LDAP server
 sudo /local/repository/ldap/installLdapHead.sh
