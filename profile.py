@@ -7,14 +7,23 @@ import geni.rspec.igext as IG
 # Create a portal context.
 pc = portal.Context()
 
-pc.defineParameter( "n", "Number of worker nodes, a number from 2 to 5", portal.ParameterType.INTEGER, 2 )
+pc.defineParameter( "n", "Number of worker nodes (2 or more)", portal.ParameterType.INTEGER, 2 )
+pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 1 )
+pc.defineParameter( "corecount", "Number of cores in each node (2 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4 )
+pc.defineParameter( "ramsize", "MB of RAM in each node (2048 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4096 )
 params = pc.bindParameters()
 
 # Create a Request object to start building the RSpec.
 request = pc.makeRequestRSpec()
 
-if params.n < 2 or params.n > 5:
-  portal.context.reportError( portal.ParameterError( "You must choose at least 2 and no more than 5 worker nodes." ) )
+if params.n < 2:
+  portal.context.reportError( portal.ParameterError( "You must request at least 2 worker nodes." ) )
+if params.pfscount < 1:
+  portal.context.reportError( portal.ParameterError( "You must request at least 1 parallel file system node." ) )
+if params.corecount < 2:
+  portal.context.reportError( portal.ParameterError( "You must request at least 2 cores per node." ) )
+if params.ramsize < 2048:
+  portal.context.reportError( portal.ParameterError( "You must request at least 2048 MB of RAM per node." ) )
 
 # Lists for the nodes and such
 nodeList = []
@@ -33,8 +42,8 @@ request.addTour(tour)
 
 prefixForIP = "192.168.1."
 
-beegfnNum = params.n + 1
-slurmNum = params.n + 2
+slurmNum = params.n + 1
+beegfnNum = params.n + 2
 
 link = request.LAN("lan")
 
@@ -47,9 +56,9 @@ for i in range(0,params.n + 3):
     node = request.XenVM("head")
   else:
     node = request.XenVM("worker-" + str(i))
-  node.cores = 4
-  node.ram = 4096
   
+  node.cores = params.corecount
+  node.ram = params.ramsize
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU18-64-STD"
   
   iface = node.addInterface("if" + str(i+1))
