@@ -49,6 +49,9 @@ beegfnNum = []
 for x in range(params.pfscount):
   beegfnNum.append(params.n + 2 + x)
 
+# Machines: n workers plus pfscount pfs machines plus head plus nfs
+machineCount = params.n + params.pfscount + 2
+
 #beegfnNum = params.n + 2
 
 link = request.LAN("lan")
@@ -57,7 +60,8 @@ for i in range(0,params.n + 3):
   if i == 0:
     node = request.XenVM("nfs")
   elif i in beegfnNum:
-    node = request.XenVM("pfs-" + (i - (params.n + 1)))
+    pfsNumber = i - (params.n + 1)
+    node = request.XenVM("pfs-" + str(pfsNumber))
   elif i == slurmNum:
     node = request.XenVM("head")
   else:
