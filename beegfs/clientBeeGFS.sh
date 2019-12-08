@@ -4,13 +4,15 @@
 
 echo 'clientBeeGFS.sh'
 
+BEEGFS_SERVER=$1
+
 sudo cp /local/repository/beegfs/beegfs-deb8.list /etc/apt/sources.list.d/beegfs-deb8.list
 
 sudo wget -q https://www.beegfs.io/release/latest-stable/gpg/DEB-GPG-KEY-beegfs -O- | sudo apt-key add -
 sudo apt-get update -y
 sudo apt-get install -y beegfs-helperd beegfs-utils
 sudo apt-get install -y beegfs-client
-sudo /opt/beegfs/sbin/beegfs-setup-client -m pfs-1
+sudo /opt/beegfs/sbin/beegfs-setup-client -m $BEEGFS_SERVER
 
 sudo systemctl start beegfs-helperd
 sudo systemctl start beegfs-client
