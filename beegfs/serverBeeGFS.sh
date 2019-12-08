@@ -19,23 +19,46 @@ sudo apt-get install -y beegfs-meta
 sudo apt-get install -y beegfs-storage
 sudo apt-get install -y beegfs-client beegfs-helperd beegfs-utils
 
-if [ $MY_NAME = $BGFS_MGMTD_SVR ]
-then
-   sudo /opt/beegfs/sbin/beegfs-setup-mgmtd -p /data/beegfs/beegfs_mgmtd
-   sudo systemctl start beegfs-mgmtd
-fi
+# We will call this with the name of this node, followed by one ore more {mgmt|meta|storage followed by appropriate arguments}, as below
 
-if [ $MY_NAME = $BGFS_META_SVR ]
-then
-   sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s BGFS_META_NUMBER -m $MY_NAME
-   sudo systemctl start beegfs-meta
-fi
+MY_NAME=$1
+shift
 
-if [ $MY_NAME = $BGFS_STORAGE_SVR ]
-then
-   sudo /opt/beegfs/sbin/beegfs-setup-storage -p /mnt/myraid1/beegfs_storage -s BGFS_STORAGE_NUMBER -i 301 -m $MY_NAME
-   sudo systemctl start beegfs-storage
-fi
+while [ "$1" != "" ]
+do
+   case $1 in 
+      mgmt | MGMT )        shift
+                           BGFS_MGMTD_SVR=$1
+                           shift
+                           if [ $MY_NAME = $BGFS_MGMTD_SVR ]
+                           then
+                              sudo /opt/beegfs/sbin/beegfs-setup-mgmtd -p /data/beegfs/beegfs_mgmtd
+                              sudo systemctl start beegfs-mgmtd
+                           fi
+                           ;;
+      meta | META )	      shift
+                           BGFS_META_SVR=$1
+                           shift
+                           BGFS_META_NUMBER=$1
+                           shift
+                           if [ $MY_NAME = $BGFS_META_SVR ]
+                           then
+                              sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s $BGFS_META_NUMBER -m $MY_NAME
+                              sudo systemctl start beegfs-meta
+                           fi
+                           ;;
+      storage | STORAGE )  shift
+                           BGFS_STORAGE_SVR=$1
+                           shift
+                           BGFS_STORAGE_NUMBER=$1
+                           shift
+                           if [ $MY_NAME = $BGFS_STORAGE_SVR ]
+                           then
+                              sudo /opt/beegfs/sbin/beegfs-setup-storage -p /mnt/myraid1/beegfs_storage -s $BGFS_STORAGE_NUMBER -i $(($BGFS_STORAGE_NUMBER + 300)) -m $MY_NAME
+                              sudo systemctl start beegfs-storage
+                           fi
+   esac
+done
 
 #sudo /opt/beegfs/sbin/beegfs-setup-mgmtd -p /data/beegfs/beegfs_mgmtd
 #sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s 2 -m pfs-$1
