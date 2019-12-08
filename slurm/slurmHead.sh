@@ -5,10 +5,22 @@ echo 'slurmHead.sh'
 
 sudo apt-get update -y
 
+# Next three lines from https://github.com/mknoxnv/ubuntu-slurm/blob/master/node-config.sh
+SOCKET_COUNT=`lscpu | grep "Socket(s):"  | cut -d : -f 2 | awk '{print $1}'`
+CORESPERSOCKET=`lscpu | grep "Core(s) per socket:" | cut -d : -f 2 | awk '{print $1}'`
+THREADSPERCORE=`lscpu | grep "Thread(s) per core:" | cut -d : -f 2 | awk '{print $1}'`
+
 #HOSTNAMETRIM=$(echo $HOSTNAME | awk -F'.' '{print $1}')
 #sudo sed -i "s/ControlMachine=slurm-ctrl/ControlMachine=$HOSTNAMETRIM/g" /local/repository/slurm/slurm.conf
 SLURMMACHINELIST=worker-[1-$(($1))]
-sudo sed -i "s/NodeName=linux1/NodeName=$SLURMMACHINELIST/g" /local/repository/slurm/slurm.conf
+MEM_PER_NODE=$(($3 - 1024))
+sudo sed -i "s/NodeName=SET_NODE_NAME/NodeName=$SLURMMACHINELIST/g" /local/repository/slurm/slurm.conf
+sudo sed -i "s/CPUs=SET_CPU_COUNT/CPUs=$(($2))/g" /local/repository/slurm/slurm.conf
+sudo sed -i "s/DefMemPerNode=SET_DEF_MEM_NODE/DefMemPerNode=$MEM_PER_NODE/g" /local/repository/slurm/slurm.conf
+sudo sed -i "s/Sockets=SET_SOCKET_COUNT/Sockets=$SOCKET_COUNT/g" /local/repository/slurm/slurm.conf
+sudo sed -i "s/CoresPerSocket=SET_CORES_PER_SOCKET/CoresPerSocket=$CORESPERSOCKET/g" /local/repository/slurm/slurm.conf
+sudo sed -i "s/ThreadsPerCore=SET_THREADS_PER_CORE/ThreadsPerCore=$THREADSPERCORE/g" /local/repository/slurm/slurm.conf
+sudo sed -i "s/RealMemory=SET_REAL_MEM/RealMemory=$(($3))/g" /local/repository/slurm/slurm.conf
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git gcc make ruby ruby-dev libpam0g-dev libmariadb-client-lgpl-dev libmysqlclient-dev
 sudo gem install fpm
@@ -81,7 +93,7 @@ sudo sacctmgr --immediate add account compute-account description="Compute accou
 sudo sacctmgr --immediate create user myuser account=compute-account adminlevel=None
 #sudo sinfo  # test query
 
-# Copy the key for the clients to use
+# Copy the key and configuration for the clients to use
 sudo mkdir /software/mungedata
 sudo cp /etc/munge/munge.key /software/mungedata/
 sudo cp /local/repository/slurm/slurm.conf /software/mungedata/
