@@ -43,15 +43,21 @@ request.addTour(tour)
 prefixForIP = "192.168.1."
 
 slurmNum = params.n + 1
-beegfnNum = params.n + 2
+
+# Set up for multiple pfs machines
+beegfnNum = []
+for x in range(params.pfscount):
+  beegfnNum.append(params.n + 2 + x)
+
+#beegfnNum = params.n + 2
 
 link = request.LAN("lan")
 
 for i in range(0,params.n + 3):
   if i == 0:
     node = request.XenVM("nfs")
-  elif i == beegfnNum:
-    node = request.XenVM("pfs")
+  elif i in beegfnNum:
+    node = request.XenVM("pfs-" + (i - (params.n + 1)))
   elif i == slurmNum:
     node = request.XenVM("head")
   else:
@@ -79,7 +85,7 @@ for i in range(0,params.n + 3):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/docker/install_docker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
-  elif i == beegfnNum:
+  elif i in beegfnNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(params.n)))
   elif i == slurmNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/ldap/installLdapClient.sh"))
