@@ -20,7 +20,7 @@ sudo sed -i "s/DefMemPerNode=SET_DEF_MEM_NODE/DefMemPerNode=$MEM_PER_NODE/g" /lo
 sudo sed -i "s/Sockets=SET_SOCKET_COUNT/Sockets=$SOCKET_COUNT/g" /local/repository/slurm/slurm.conf
 sudo sed -i "s/CoresPerSocket=SET_CORES_PER_SOCKET/CoresPerSocket=$CORESPERSOCKET/g" /local/repository/slurm/slurm.conf
 sudo sed -i "s/ThreadsPerCore=SET_THREADS_PER_CORE/ThreadsPerCore=$THREADSPERCORE/g" /local/repository/slurm/slurm.conf
-sudo sed -i "s/RealMemory=SET_REAL_MEM/RealMemory=$(($3))/g" /local/repository/slurm/slurm.conf
+sudo sed -i "s/RealMemory=SET_REAL_MEM/RealMemory=$MEM_PER_NODE/g" /local/repository/slurm/slurm.conf
 
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y git gcc make ruby ruby-dev libpam0g-dev libmariadb-client-lgpl-dev libmysqlclient-dev
 sudo gem install fpm
