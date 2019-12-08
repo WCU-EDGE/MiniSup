@@ -10,7 +10,7 @@ sudo wget -q https://www.beegfs.io/release/latest-stable/gpg/DEB-GPG-KEY-beegfs 
 sudo apt-get update -y
 sudo apt-get install -y beegfs-helperd beegfs-utils
 sudo apt-get install -y beegfs-client
-sudo /opt/beegfs/sbin/beegfs-setup-client -m pfs
+sudo /opt/beegfs/sbin/beegfs-setup-client -m pfs-1
 
 sudo systemctl start beegfs-helperd
 sudo systemctl start beegfs-client
