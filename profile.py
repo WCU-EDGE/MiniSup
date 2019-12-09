@@ -46,7 +46,7 @@ slurmNum = params.n + 1
 
 # Set up for multiple pfs machines
 beegfnNum = []
-for x in range(params.pfscount):
+for x in range((params.pfscount + 1)):
   beegfnNum.append(params.n + 2 + x)
 
 # Machines: (n workers) plus (pfscount pfs machines) plus head plus nfs
