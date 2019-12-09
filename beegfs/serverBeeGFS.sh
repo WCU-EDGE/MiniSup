@@ -21,6 +21,9 @@ IS_STORAGE=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"sto
 IS_META=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"meta\")" $PFS_JSON_FILE)
 IS_MGMT=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"mgmt\")" $PFS_JSON_FILE)
 
+BEEGFS_MGMT_SVR_RAW=$(jq ".[] | select(.type == \"mgmt\") | .nodename" $PFS_JSON_FILE)
+BEEGFS_MGMT_SERVER=$(sed -e 's/^"//' -e 's/"$//' <<<"$BEEGFS_MGMT_SVR_RAW")
+
 if [[ $IS_MGMT != "" ]]
 then
   sudo /opt/beegfs/sbin/beegfs-setup-mgmtd -p /data/beegfs/beegfs_mgmtd
@@ -29,16 +32,18 @@ fi
 
 if [[ $IS_META != "" ]]
 then
+   sleep 180
    SERVICE_ID=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"meta\") | .serviceID" $PFS_JSON_FILE)
-   sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s $SERVICE_ID -m $MY_NAME
+   sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s $SERVICE_ID -m $BEEGFS_MGMT_SERVER
    sudo systemctl start beegfs-meta
 fi
 
 if [[ $IS_STORAGE != "" ]]
 then
+   sleep 180
    SERVICE_ID=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"storage\") | .serviceID" $PFS_JSON_FILE)
    STORAGE_TARGET_ID=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"storage\") | .storagetarget" $PFS_JSON_FILE)
-   sudo /opt/beegfs/sbin/beegfs-setup-storage -p /mnt/myraid$SERVICE_ID/beegfs_storage -s $SERVICE_ID -i $STORAGE_TARGET_ID -m $MY_NAME
+   sudo /opt/beegfs/sbin/beegfs-setup-storage -p /mnt/myraid$SERVICE_ID/beegfs_storage -s $SERVICE_ID -i $STORAGE_TARGET_ID -m $BEEGFS_MGMT_SERVER
    sudo systemctl start beegfs-storage
 fi
 
