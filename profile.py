@@ -49,7 +49,7 @@ beegfnNum = []
 for x in range(params.pfscount):
   beegfnNum.append(params.n + 2 + x)
 
-# Machines: n workers plus pfscount pfs machines plus head plus nfs
+# Machines: (n workers) plus (pfscount pfs machines) plus head plus nfs
 machineCount = params.n + params.pfscount + 2
 
 #beegfnNum = params.n + 2
@@ -61,7 +61,8 @@ for i in range(0,params.n + 3):
     node = request.XenVM("nfs")
   elif i in beegfnNum:
     pfsNumber = i - (params.n + 1)
-    node = request.XenVM("pfs-" + str(pfsNumber))
+    pfsName = "pfs-" + str(pfsNumber)
+    node = request.XenVM(pfsName)
   elif i == slurmNum:
     node = request.XenVM("head")
   else:
@@ -90,7 +91,7 @@ for i in range(0,params.n + 3):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
   elif i in beegfnNum:
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(pfsNumber)))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + pfsName))
     #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(params.n) + " " + str(pfsNumber)))
   elif i == slurmNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/ldap/installLdapClient.sh"))
