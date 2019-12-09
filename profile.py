@@ -56,7 +56,8 @@ machineCount = params.n + params.pfscount + 2
 
 link = request.LAN("lan")
 
-for i in range(0,params.n + 3):
+#for i in range(0,params.n + 3):
+for i in range(0,machineCount):
   if i == 0:
     node = request.XenVM("nfs")
   elif i in beegfnNum:
