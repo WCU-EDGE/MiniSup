@@ -4,61 +4,56 @@
 
 echo 'serverBeeGFS.sh'
 
-MY_NAME=$1
-BGFS_MGMTD_SVR=$2
-BGFS_META_SVR=$3
-BGFS_META_NUMBER=$4
-BGFS_STORAGE_SVR=$5
-BGFS_STORAGE_NUMBER=$6
-
 sudo wget -O /etc/apt/sources.list.d/beegfs-deb9.list https://www.beegfs.io/release/latest-stable/dists/beegfs-deb9.list
 sudo wget -q https://www.beegfs.io/release/latest-stable/gpg/DEB-GPG-KEY-beegfs -O- | sudo apt-key add -
 sudo apt-get update -y
+sudo apt-get install -y jq
 sudo apt-get install -y beegfs-mgmtd
 sudo apt-get install -y beegfs-meta
 sudo apt-get install -y beegfs-storage
 sudo apt-get install -y beegfs-client beegfs-helperd beegfs-utils
 
-# We will call this with the name of this node, followed by one ore more {mgmt|meta|storage followed by appropriate arguments}, as below
-
+# We will read the parallel file system info from a JSON file
 MY_NAME=$1
-shift
+PFS_JSON_FILE=/local/repository/beegfs/pfs_servers.json
 
-while [ "$1" != "" ]
-do
-   case $1 in 
-      mgmt | MGMT )        shift
-                           BGFS_MGMTD_SVR=$1
-                           shift
-                           if [ $MY_NAME = $BGFS_MGMTD_SVR ]
-                           then
-                              sudo /opt/beegfs/sbin/beegfs-setup-mgmtd -p /data/beegfs/beegfs_mgmtd
-                              sudo systemctl start beegfs-mgmtd
-                           fi
-                           ;;
-      meta | META )	      shift
-                           BGFS_META_SVR=$1
-                           shift
-                           BGFS_META_NUMBER=$1
-                           shift
-                           if [ $MY_NAME = $BGFS_META_SVR ]
-                           then
-                              sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s $BGFS_META_NUMBER -m $MY_NAME
-                              sudo systemctl start beegfs-meta
-                           fi
-                           ;;
-      storage | STORAGE )  shift
-                           BGFS_STORAGE_SVR=$1
-                           shift
-                           BGFS_STORAGE_NUMBER=$1
-                           shift
-                           if [ $MY_NAME = $BGFS_STORAGE_SVR ]
-                           then
-                              sudo /opt/beegfs/sbin/beegfs-setup-storage -p /mnt/myraid1/beegfs_storage -s $BGFS_STORAGE_NUMBER -i $(($BGFS_STORAGE_NUMBER + 300)) -m $MY_NAME
-                              sudo systemctl start beegfs-storage
-                           fi
-   esac
-done
+if [ -f $PFS_JSON_FILE ] 
+then
+   IS_STORAGE=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"storage\")" $PFS_JSON_FILE)
+   IS_META=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"meta\")" $PFS_JSON_FILE)
+   IS_MGMT=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"mgmt\")" $PFS_JSON_FILE)
+
+   if [[ $IS_MGMT != "" ]]
+   then
+     sudo /opt/beegfs/sbin/beegfs-setup-mgmtd -p /data/beegfs/beegfs_mgmtd
+     sudo systemctl start beegfs-mgmtd
+   fi
+
+   if [[ $IS_META != "" ]]
+   then
+      SERVICE_ID=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"meta\") | .serviceID" $PFS_JSON_FILE)
+      sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s $SERVICE_ID -m $MY_NAME
+      sudo systemctl start beegfs-meta
+   fi
+
+   if [[ $IS_STORAGE != "" ]]
+   then
+      SERVICE_ID=$(jq ".[] | select(.nodename == \"$MY_NAME\") | select(.type == \"storage\") | .serviceID" $PFS_JSON_FILE)
+      STORAGE_TARGET_ID=$(($SERVICE_ID + 298))
+      sudo /opt/beegfs/sbin/beegfs-setup-storage -p /mnt/myraid$SERVICE_ID/beegfs_storage -s $SERVICE_ID -i $STORAGE_TARGET_ID -m $MY_NAME
+      sudo systemctl start beegfs-storage
+   fi
+else
+   # This is the only pfs server.  Set it up.
+   sudo /opt/beegfs/sbin/beegfs-setup-mgmtd -p /data/beegfs/beegfs_mgmtd
+   sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s 2 -m $MY_NAME
+   sudo /opt/beegfs/sbin/beegfs-setup-storage -p /mnt/myraid1/beegfs_storage -s 3 -i 301 -m $MY_NAME
+   
+   sudo systemctl start beegfs-mgmtd
+   sudo systemctl start beegfs-meta
+   sudo systemctl start beegfs-storage
+fi
+
 
 #sudo /opt/beegfs/sbin/beegfs-setup-mgmtd -p /data/beegfs/beegfs_mgmtd
 #sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s 2 -m pfs-$1
@@ -66,7 +61,7 @@ done
 #
 ##sudo /opt/beegfs/sbin/beegfs-setup-meta -p /data/beegfs/beegfs_meta -s 2 -m pfs
 ##sudo /opt/beegfs/sbin/beegfs-setup-storage -p /mnt/myraid1/beegfs_storage -s 3 -i 301 -m pfs
-
+#
 #sudo systemctl start beegfs-mgmtd
 #sudo systemctl start beegfs-meta
 #sudo systemctl start beegfs-storage
