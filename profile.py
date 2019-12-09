@@ -8,7 +8,7 @@ import geni.rspec.igext as IG
 pc = portal.Context()
 
 pc.defineParameter( "n", "Number of worker nodes (2 or more)", portal.ParameterType.INTEGER, 2 )
-pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 1 )
+pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 2 )
 pc.defineParameter( "corecount", "Number of cores in each node (2 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4 )
 pc.defineParameter( "ramsize", "MB of RAM in each node (2048 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4096 )
 params = pc.bindParameters()
