@@ -1,1 +1,1 @@
-# cluster-template
+# MiniSup
