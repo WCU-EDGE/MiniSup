@@ -93,7 +93,6 @@ for i in range(0,machineCount):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
   elif i in beegfnNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + pfsName))
-    #node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/serverBeeGFS.sh " + str(params.n) + " " + str(pfsNumber)))
   elif i == slurmNum:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/ldap/installLdapClient.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs/installNfsClient.sh"))
@@ -103,7 +102,7 @@ for i in range(0,machineCount):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/docker/install_docker.sh"))
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nodeWorker.sh"))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/workers/nodeWorker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/slurm/slurmClient.sh " + str(params.n)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
