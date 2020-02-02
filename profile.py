@@ -87,7 +87,7 @@ for i in range(0,machineCount):
   node.addService(pg.Execute(shell="sh", command="sudo chmod 755 /local/repository/beegfs/beegfs-deb8.list")) 
   
   if i == 0:
-    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/startingNFSInstalls.sh " + str(params.n) + " " + str(slurmNum)))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/nfs/startingNFSInstalls.sh " + str(params.n) + " " + str(slurmNum)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
   elif i in beegfnNum:
