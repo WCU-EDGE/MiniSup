@@ -8,7 +8,7 @@ import geni.rspec.igext as IG
 pc = portal.Context()
 
 pc.defineParameter( "n", "Number of worker nodes (2 or more)", portal.ParameterType.INTEGER, 2 )
-pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 2 )
+#pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 2 )
 pc.defineParameter( "corecount", "Number of cores in each node (2 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4 )
 pc.defineParameter( "ramsize", "MB of RAM in each node (2048 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4096 )
 params = pc.bindParameters()
@@ -18,8 +18,8 @@ request = pc.makeRequestRSpec()
 
 if params.n < 2:
   portal.context.reportError( portal.ParameterError( "You must request at least 2 worker nodes." ) )
-if params.pfscount < 1:
-  portal.context.reportError( portal.ParameterError( "You must request at least 1 parallel file system node." ) )
+#if params.pfscount < 1:
+#  portal.context.reportError( portal.ParameterError( "You must request at least 1 parallel file system node." ) )
 if params.corecount < 2:
   portal.context.reportError( portal.ParameterError( "You must request at least 2 cores per node." ) )
 if params.ramsize < 2048:
@@ -45,12 +45,15 @@ prefixForIP = "192.168.1."
 slurmNum = params.n + 1
 
 # Set up for multiple pfs machines
+#   Get number of PFS servers from the JSON file
+PFSCOUNT=$((awk '{ for (i=1; i<=NF; i++) if ($i ~ /{"servercount":.*/) print substr($i,3) }' /local/repository/beegfs/pfs_servers.json) |grep -o '[0-9]\+')
+#   Make a list of PFS server numbers (will be appended to "pfs-" to make machine names)
 beegfnNum = []
-for x in range((params.pfscount + 1)):
+for x in range(($PFSCOUNT + 1)):
   beegfnNum.append(params.n + 2 + x)
 
 # Machines: (n workers) plus (pfscount pfs machines) plus head plus nfs
-machineCount = params.n + params.pfscount + 2
+machineCount = params.n + $PFSCOUNT + 2
 
 #beegfnNum = params.n + 2
 
