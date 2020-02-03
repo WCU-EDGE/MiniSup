@@ -47,7 +47,7 @@ slurmNum = params.n + 1
 
 # Set up for multiple pfs machines
 #   Get number of PFS servers from the JSON file
-with open("/local/repository/beegfs/pfs_servers.json", "r") as pfs_file:
+with open("beegfs/pfs_servers.json", "r") as pfs_file:
     pfs_json = json.load(pfs_file)
 pfs_count = pfs_json["servercount"]
 
