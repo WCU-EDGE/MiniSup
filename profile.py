@@ -8,7 +8,7 @@ import geni.rspec.igext as IG
 pc = portal.Context()
 
 pc.defineParameter( "n", "Number of worker nodes (2 or more)", portal.ParameterType.INTEGER, 2 )
-#pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 2 )
+pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 2 )
 pc.defineParameter( "corecount", "Number of cores in each node (2 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4 )
 pc.defineParameter( "ramsize", "MB of RAM in each node (2048 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4096 )
 params = pc.bindParameters()
@@ -43,6 +43,9 @@ request.addTour(tour)
 prefixForIP = "192.168.1."
 
 slurmNum = params.n + 1
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+portal.context.reportError( portal.ParameterError( "$DIR" ) )
 
 # Set up for multiple pfs machines
 #   Get number of PFS servers from the JSON file
