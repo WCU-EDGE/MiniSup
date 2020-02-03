@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#SBATCH --job-name=mpi
+#SBATCH --nodes=4 --ntasks-per-node=4
+#SBATCH --time=1:00:00
+
+cd ~/source/openmpi
+mpicc -o mpiio_bigwrite mpiio_bigwrite.c
+
+NCPU=1
+while [  $NCPU -le 16  ];
+do
+  time mpirun -np $NCPU mpiio_bigwrite
+  rm /mnt/beegfs/output.dat
+  let NCPU=NCPU*2
+done
