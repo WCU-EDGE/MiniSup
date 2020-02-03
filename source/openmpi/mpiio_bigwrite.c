@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #define array_size 512000000
 
-static char filename[] = "output.dat";
+static char filename[] = "/mnt/beegfs/output.dat";
 
-main(int argc, char **argv)
+int main(int argc, char **argv)
 {
   int rank, size, offset, local_size;
   MPI_File outfile;
