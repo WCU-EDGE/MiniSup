@@ -3,12 +3,13 @@ import geni.portal as portal
 # Import the ProtoGENI library.
 import geni.rspec.pg as pg
 import geni.rspec.igext as IG
+import json
 
 # Create a portal context.
 pc = portal.Context()
 
 pc.defineParameter( "n", "Number of worker nodes (2 or more)", portal.ParameterType.INTEGER, 2 )
-pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 2 )
+#pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more)", portal.ParameterType.INTEGER, 2 )
 pc.defineParameter( "corecount", "Number of cores in each node (2 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4 )
 pc.defineParameter( "ramsize", "MB of RAM in each node (2048 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4096 )
 params = pc.bindParameters()
@@ -44,18 +45,19 @@ prefixForIP = "192.168.1."
 
 slurmNum = params.n + 1
 
-portal.context.reportError( portal.ParameterError( "$0" ) )
-
 # Set up for multiple pfs machines
-##   Get number of PFS servers from the JSON file
-#PFSCOUNT=$((awk '{ for (i=1; i<=NF; i++) if ($i ~ /{"servercount":.*/) print substr($i,3) }' /local/repository/beegfs/pfs_servers.json) |grep -o '[0-9]\+')
+#   Get number of PFS servers from the JSON file
+with open("/local/repository/beegfs/pfs_servers.json", "r") as pfs_file:
+    pfs_json = json.load(pfs_file)
+pfs_count = pfs_json["servercount"]
+
 ##   Make a list of PFS server numbers (will be appended to "pfs-" to make machine names)
 beegfnNum = []
-for x in range((params.pfscount + 1)):
+for x in range((pfs_count + 1)):
   beegfnNum.append(params.n + 2 + x)
 
-# Machines: (n workers) plus (pfscount pfs machines) plus head plus nfs
-machineCount = params.n + params.pfscount + 2
+# Machines: (n workers) plus (pfs_count number of pfs machines) plus (head node and nfs node = 2)
+machineCount = params.n + pfs_count + 2
 
 #beegfnNum = params.n + 2
 
