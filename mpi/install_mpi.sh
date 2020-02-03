@@ -11,9 +11,9 @@ sudo cp /software/slurm/include/slurm/pmi.h /software/slurm/include/
 #sudo ln -s /software/slurm/include/slurm/pmi.h /software/slurm/include/pmi.h
 
 # Install MPI itself
-sudo wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.2.tar.gz
-gunzip -c openmpi-4.0.2.tar.gz | tar xf -
-cd openmpi-4.0.2
+sudo wget https://download.open-mpi.org/release/open-mpi/v3.1/openmpi-3.1.5.tar.gz
+gunzip -c openmpi-3.1.5.tar.gz | tar xf -
+cd openmpi-3.1.5
 sudo ./configure --prefix=/software/openmpi --with-slurm --with-pmi=/usr -q
 sudo make all install
 PATH=$PATH:/software/openmpi/bin
@@ -58,5 +58,5 @@ done
 sudo chmod 755 $MACHINELISTFILE 
 
 cd ..
-sudo rm -Rf openmpi-4.0.2
-sudo rm -Rf openmpi-4.0.2.tar.gz
+sudo rm -Rf openmpi-3.1.5
+sudo rm -Rf openmpi-3.1.5.tar.gz
