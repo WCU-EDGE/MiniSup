@@ -44,8 +44,7 @@ prefixForIP = "192.168.1."
 
 slurmNum = params.n + 1
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-portal.context.reportError( portal.ParameterError( "$DIR" ) )
+portal.context.reportError( portal.ParameterError( "$0" ) )
 
 # Set up for multiple pfs machines
 #   Get number of PFS servers from the JSON file
