@@ -24,11 +24,15 @@ sudo systemctl start beegfs-helperd
 sudo systemctl start beegfs-client
 
 sudo ln -s /mnt/beegfs /scratch
-sudo mkdir /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')
+sudo /local/repository/beegfs/createUserDirs.sh
 
-# Copy the source files from the repository, if they exist.
-sudo cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
-sudo chmod 755 /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')/*
-
-# Copy source files, if they exist
-cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
+## Moved to createUserDirs.sh
+#sudo ln -s /mnt/beegfs /scratch
+#sudo mkdir /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')
+#
+## Copy the source files from the repository, if they exist.
+#sudo cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
+#sudo chmod 755 /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}')/*
+#
+## Copy source files, if they exist
+#cp /local/repository/source/* /scratch/$(echo $HOSTNAME | awk -F'.' '{print $1}') || true
