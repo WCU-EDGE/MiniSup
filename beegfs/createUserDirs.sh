@@ -14,8 +14,8 @@ do
        sudo mkdir /scratch/$u
         
        # Copy the source files from the repository, if they exist.
-       sudo cp /local/repository/source/* /scratch/$u || true
-       sudo chmod 755 /scratch/$u/*
+       sudo cp -R /local/repository/source/* /scratch/$u || true
+       sudo chmod -R 755 /scratch/$u/*
     
        # Give ownership to the user
        sudo chown -hR $u /scratch/$u
