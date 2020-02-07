@@ -8,7 +8,7 @@ import geni.rspec.igext as IG
 pc = portal.Context()
 
 pc.defineParameter( "n", "Number of worker nodes (2 or more)", portal.ParameterType.INTEGER, 2 )
-pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more). If you change this, also change pfs/pfs_servers.json to match!", portal.ParameterType.INTEGER, 2 )
+pc.defineParameter( "pfscount", "Number of parallel file system nodes (1 or more). If you change this, also change pfs/pfs_servers.json to match!", portal.ParameterType.INTEGER, 4 )
 pc.defineParameter( "corecount", "Number of cores in each node (2 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4 )
 pc.defineParameter( "ramsize", "MB of RAM in each node (2048 or more).  NB: Make certain your requested cluster can supply this quantity.", portal.ParameterType.INTEGER, 4096 )
 params = pc.bindParameters()
@@ -25,7 +25,7 @@ if params.corecount < 2:
 if params.ramsize < 2048:
   portal.context.reportError( portal.ParameterError( "You must request at least 2048 MB of RAM per node." ) )
 
-# Lists for the nodes and such
+# List for the nodes
 nodeList = []
 
 tourDescription = \
@@ -34,7 +34,7 @@ This profile provides a Slurm and Open MPI cluster installed on Ubuntu 18.04.
 """
 
 #
-# Setup the Tour info with the above description and instructions.
+# Set up the Tour info with the above description and instructions.
 #  
 tour = IG.Tour()
 tour.Description(IG.Tour.TEXT,tourDescription)
@@ -49,14 +49,11 @@ beegfnNum = []
 for x in range((params.pfscount + 1)):
   beegfnNum.append(params.n + 2 + x)
 
-# Machines: (n workers) plus (pfscount pfs machines) plus head plus nfs
+# The number of machines is: (n of workers) plus (pfscount of pfs machines) plus (head plus nfs)
 machineCount = params.n + params.pfscount + 2
-
-#beegfnNum = params.n + 2
 
 link = request.LAN("lan")
 
-#for i in range(0,params.n + 3):
 for i in range(0,machineCount):
   if i == 0:
     node = request.XenVM("nfs")
