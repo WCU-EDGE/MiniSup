@@ -11,6 +11,6 @@ NCPU=1
 while [  $NCPU -le 16  ];
 do
   time mpirun -np $NCPU mpiio_bigwrite
-  rm /mnt/beegfs/output.dat
+  rm /scratch/merino/output.dat
   let NCPU=NCPU*2
 done
