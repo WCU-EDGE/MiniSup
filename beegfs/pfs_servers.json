@@ -2,5 +2,6 @@
 {"type":"mgmt", "nodename": "pfs-1"},
 {"type":"meta", "nodename": "pfs-2", "serviceID":2},
 {"type":"storage", "nodename": "pfs-3", "serviceID":3, "storagetarget":301},
-{"type":"storage", "nodename": "pfs-4", "serviceID":4, "storagetarget":401}
+{"type":"storage", "nodename": "pfs-4", "serviceID":4, "storagetarget":401},
+{"type":"storage", "nodename": "pfs-5", "serviceID":5, "storagetarget":501}
 ]
