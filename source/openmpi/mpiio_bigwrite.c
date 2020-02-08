@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #define array_size 512000000
 
-static char filename[] = "/mnt/beegfs/output.dat";
+static char filename[] = "/scratch/merino/output.dat";
 
 int main(int argc, char **argv)
 {
