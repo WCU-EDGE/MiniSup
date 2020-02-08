@@ -4,6 +4,8 @@
 
 echo 'clientBeeGFS.sh'
 
+set -x
+
 sudo cp /local/repository/beegfs/beegfs-deb8.list /etc/apt/sources.list.d/beegfs-deb8.list
 
 sudo wget -q https://www.beegfs.io/release/latest-stable/gpg/DEB-GPG-KEY-beegfs -O- | sudo apt-key add -
