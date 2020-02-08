@@ -23,6 +23,17 @@ sudo /opt/beegfs/sbin/beegfs-setup-client -m $BEEGFS_MGMT_SERVER
 sudo systemctl start beegfs-helperd
 sudo systemctl start beegfs-client
 
+# If the client service didn't start (meaning the server isn't live yet) then retry it until it does start
+sleep 180
+STARTOUTPUT=$(sudo systemctl status beegfs-client)
+STARTWORKED=$(echo $STARTOUTPUT | grep "Active: active (exited)")
+while [ -z "$STARTWORKED" ]; do
+   sudo systemctl start beegfs-client
+   sleep 180
+   STARTOUTPUT=$(sudo systemctl status beegfs-client)
+   STARTWORKED=$(echo $STARTOUTPUT | grep "Active: active (exited)")
+done
+
 sudo ln -s /mnt/beegfs /scratch
 sudo /local/repository/beegfs/createUserDirs.sh
 
