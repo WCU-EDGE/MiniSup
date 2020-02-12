@@ -1,16 +1,18 @@
 #!/bin/bash
 
 #SBATCH --job-name=mpi
-#SBATCH --nodes=4 --ntasks-per-node=4
+#SBATCH --nodes=4 --ntasks-per-node=12
 #SBATCH --time=1:00:00
 
 cd ~/source/openmpi
 mpicc -o static static.c
 
 STEP=2147000000
-NCPU=1
-while [  $NCPU -le 16  ];
+time mpirun -np 1 static 0 1 ${STEP}
+
+NCPU=2
+while [  $NCPU -le 48  ];
 do
   time mpirun -np $NCPU static 0 1 ${STEP}
-  let NCPU=NCPU*2
+  let NCPU=NCPU+2
 done
