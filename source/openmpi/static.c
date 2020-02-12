@@ -53,8 +53,7 @@ int main(int argc, char * argv[] ) {
 
   // displaying output at the master node
   if (rank == 0){
-    printf("Calculating the integral of f(x) from %lf to %lf\n", a, b);
-    printf("The integral is %lf\n", result);  
+    printf("The integral of f(x) from %lf to %lf using %d processses is %lf\n", a, b, size, result);
   }
   MPI_Finalize();
 }
