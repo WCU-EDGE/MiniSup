@@ -16,7 +16,7 @@ STARTOUTPUT=$(sudo systemctl status sshd)
 STARTWORKED=$(echo $STARTOUTPUT | grep "Active: active (running)")
 while [ -z "$STARTWORKED" ]; do
    sudo systemctl restart sshd
-   sleep 30
+   sleep 300
    STARTOUTPUT=$(sudo systemctl status sshd)
    STARTWORKED=$(echo $STARTOUTPUT | grep "Active: active (running)")
 done
