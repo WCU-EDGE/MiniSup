@@ -97,6 +97,7 @@ for i in range(0,machineCount):
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/mpi/install_mpi.sh " + str(params.n)))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/beegfs/clientBeeGFS.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/addpasswordless.sh " + str(params.n)))
+    node.addService(pg.Execute(shell="sh", command="sudo /local/repository/passwordless/sshPasswordAuth.sh"))
   else:
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/workers/nodeWorker.sh"))
     node.addService(pg.Execute(shell="sh", command="sudo /local/repository/slurm/slurmClient.sh " + str(params.n)))
