@@ -48,7 +48,8 @@ EOF
 sudo mysql -u root < /tmp/setupmaria.sql
 
 cd /software
-sudo wget https://download.schedmd.com/slurm/slurm-17.11.12.tar.bz2
+#sudo wget https://download.schedmd.com/slurm/slurm-17.11.12.tar.bz2
+sudo mv /local/repository/slurm-17.11.12.tar.bz2 .
 sudo tar xvjf slurm-17.11.12.tar.bz2
 cd slurm-17.11.12
 sudo ./configure --prefix=/software/slurm --sysconfdir=/etc/slurm --enable-pam --with-pam_dir=/lib/x86_64-linux-gnu/security/ --without-shared-libslurm --with-pmix
